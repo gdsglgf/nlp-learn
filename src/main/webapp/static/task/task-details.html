@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" href="../../assets/exts/bootstrap/css/bootstrap.min.css">
+	<style type="text/css">
+		th, td {text-align:center;}
+		.more-data {display: none;}
+		.doc-space {margin-left:10px;margin-right:10pt;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h2>查看信息抽取任务</h2>
+		</div>
+		<div class="row">
+			<div class="col-md-9" role="main">
+				<div class="bs-docs-section">
+					<form method="POST" onsubmit="onSubmit(); return false;">
+						<label>任务编号: 1</label>
+						<input type="text" hidden name="taskId" value="1">
+						<table class="table table-striped">
+							<thead>
+								<th>#</th>
+								<th>文件编号</th>
+								<th>文件目录</th>
+								<th>文件名</th>
+								<th>文件字节数</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr>
+									<td>5</td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+							</tbody>
+						</table>
+						<button type="submit" class="btn btn-success">启动任务</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../assets/exts/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/exts/bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	</script>
+</body>
+</html>

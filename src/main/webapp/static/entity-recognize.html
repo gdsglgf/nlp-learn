@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<!-- <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="../assets/exts/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/footer.css">
+<link rel="stylesheet" href="../assets/exts/codemirror/lib/codemirror.css">
+<style type="text/css">
+	/*location*/
+	.n1 {background-color: 	#AA7700}
+</style>
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">开放式信息抽取原型系统</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">实体抽取</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="col-md-10 col-md-offset-1" style="margin: 30px;">
+			<div class="row"><textarea rows="17" cols="100" id="text">阿里巴巴网络技术有限公司（简称：阿里巴巴集团）是以曾担任英语教师的马云为首的18人，于1999年在杭州创立。
+
+南京长江大桥位于南京市鼓楼区下关和浦口区桥北之间。
+
+岳麓书院是古代传统书院建筑，属于中国历史上著名的四大书院之一。位于湖南省长沙市湘江西岸的岳麓山风景区岳麓山东面山下。
+</textarea></div>
+
+			<h2>实体识别结果</h2>
+			<div><span class="ORGANIZATION">阿里巴巴网络技术有限公司</span>（简称：<span class="ORGANIZATION">阿里巴巴集团</span>）是以曾担任<span class="DEMONYM">英语</span>教师的<span class="PERSON">马云</span>为首的<span class="MISC">18</span>人，于<span class="MISC">1999年</span>在<span class="GPE">杭州</span>创立。
+			</div>
+			<div><span class="FACILITY">南京长江大桥</span>位于<span class="GPE">南京市鼓楼区</span>下关和<span class="FACILITY">浦口区桥</span>北之间。</div>
+			<div>岳麓书院是古代传统书院建筑，属于<span class="GPE">中国</span>历史上著名的<span class="MISC">四</span>大书院之一。位于<span class="GPE">湖南省长沙市</span><span class="n1">湘江西岸</span>的<span class="n1">岳麓山风景区岳麓山</span>东面山下。</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="container-fluid">
+			<p class="text-muted">Copyright &copy; 2017. All rights reserved.</p>
+		</div>
+	</footer>
+	<!-- 
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	-->
+
+	<script type="text/javascript" src="../assets/exts/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../assets/exts/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../assets/exts/codemirror/lib/codemirror.js"></script>
+	<script type="text/javascript">
+		// var editor = CodeMirror.fromTextArea(document.getElementById("text"), {
+		// 	lineNumbers: true,
+		// 	lineWrapping: true
+		// });
+	</script>
+</body>
+</html>

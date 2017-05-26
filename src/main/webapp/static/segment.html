@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<!-- <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="../assets/exts/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/footer.css">
+<link rel="stylesheet" href="../assets/exts/codemirror/lib/codemirror.css">
+<style type="text/css">
+	/*location*/
+	.n1 {color: #886600}
+	.n2 {color: #660077}
+	.n3 {color: #8C0044}
+	.n4 {color: #880000}
+	.n5 {color: #A500CC}
+	.n6 {color: #FF8800}
+	.n7 {color: #FF88C2}
+	.dot1{display: inline-block;width: 50px;height: 20px;margin-right: 5px;background: #886600;}
+	.dot2{display: inline-block;width: 50px;height: 20px;margin-right: 5px;background: #660077;}
+	.dot3{display: inline-block;width: 50px;height: 20px;margin-right: 5px;background: #8C0044;}
+	.dot4{display: inline-block;width: 50px;height: 20px;margin-right: 5px;background: #880000;}
+	.dot5{display: inline-block;width: 50px;height: 20px;margin-right: 5px;background: #A500CC;}
+	.dot6{display: inline-block;width: 50px;height: 20px;margin-right: 5px;background: #FF8800;}
+	.dot7{display: inline-block;width: 50px;height: 20px;margin-right: 5px;background: #FF88C2;}
+</style>
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">开放式信息抽取原型系统</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">实体识别</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" style="margin: 30px;">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<textarea rows="7" id="text" class="col-md-10 col-md-offset-1" style="font-size:16px;">阿里巴巴网络技术有限公司（简称：阿里巴巴集团）是以曾担任英语教师的马云为首的18人，于1999年在杭州创立。
+
+南京长江大桥位于南京市鼓楼区下关和浦口区桥北之间。
+
+岳麓书院是古代传统书院建筑，属于中国历史上著名的四大书院之一。位于湖南省长沙市湘江西岸的岳麓山风景区岳麓山东面山下。
+</textarea>
+			</div>
+		</div>
+		<div class="row" style="margin-top:20px;">
+			<div class="col-md-2 col-md-offset-5">
+				<button type="submit" class="btn btn-primary">实体识别</button>
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-1">
+			<h2>实体识别结果</h2>
+			<div class="row">
+				<div class="col-md-4">
+					<p class="n1"><span class="dot1"></span>地名</p>
+					<p class="n2"><span class="dot2"></span>机构名</p>
+					<p class="n3"><span class="dot3"></span>人名</p>
+					<p class="n4"><span class="dot4"></span>含有设施的场所</p>
+					<p class="n5"><span class="dot5"></span>与国家或地域相关</p>
+					<p class="n6"><span class="dot6"></span>其他</p>
+					<p class="n7"><span class="dot7"></span>政治或人文地理区域</p>
+				</div>
+				<div class="col-md-8">
+					<div style="font-size:16px;"><span class="n2">阿里巴巴网络技术有限公司</span>（简称：<span class="n2">阿里巴巴集团</span>）是以曾担任<span class="n2">英语</span>教师的<span class="n3">马云</span>为首的<span class="n6">18</span>人，于<span class="n6">1999年</span>在<span class="n7">杭州</span>创立。</div>
+					<br>
+					<div style="font-size:16px;"><span class="n4">南京长江大桥</span>位于<span class="n7">南京市鼓楼区</span>下关和<span class="n4">浦口区桥</span>北之间。</div>
+					<br>
+					<div style="font-size:16px;">岳麓书院是古代传统书院建筑，属于<span class="n7">中国</span>历史上著名的<span class="n6">四</span>大书院之一。位于<span class="n7">湖南省长沙市</span><span class="n1">湘江西岸</span>的<span class="n1">岳麓山风景区岳麓山</span>东面山下。</div>
+				</div>
+			</div>
+
+			<div style="margin-top:20px;">
+				<table class="table table-striped">
+					<tr>
+						<th>机构名</th>
+						<td>阿里巴巴网络技术有限公司、阿里巴巴集团</td>
+					</tr>
+					<tr>
+						<th>人名</th>
+						<td>马云</td>
+					</tr>
+					<tr>
+						<th>地理位置</th>
+						<td>湘江西岸、岳麓山风景区岳麓山</td>
+					</tr>
+					<tr>
+						<th>含有设施的场所</th>
+						<td>南京长江大桥、浦口区桥</td>
+					</tr>
+					<tr>
+						<th>国家或区域相关</th>
+						<td>英语</td>
+					</tr>
+					<tr>
+						<th>数字，时间等</th>
+						<td>18、1999年、四</td>
+					</tr>
+					<tr>
+						<th>政治或人文地理区域</th>
+						<td>杭州、南京市鼓楼区、中国湖南省长沙市</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="container-fluid">
+			<p class="text-muted">Copyright &copy; 2017. All rights reserved.</p>
+		</div>
+	</footer>
+	<!-- 
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	-->
+
+	<script type="text/javascript" src="../assets/exts/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../assets/exts/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../assets/exts/codemirror/lib/codemirror.js"></script>
+	<script type="text/javascript">
+		// var editor = CodeMirror.fromTextArea(document.getElementById("text"), {
+		// 	lineNumbers: true,
+		// 	lineWrapping: true
+		// });
+	</script>
+</body>
+</html>

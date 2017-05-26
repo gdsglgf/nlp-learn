@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" href="../../assets/exts/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h2>上传数据文件夹目录</h2>
+		</div>
+		<div class="row">
+			<div class="col-md-9" role="main">
+				<form id="fileUploadForm" class="form-horizontal" action="#">
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-6 bg-info text-danger" style="display:block;padding: 10px;">错误信息</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">硬盘编号</label>
+						<div class="col-sm-6">
+							<label class="radio-inline">
+								<input type="radio" name="diskId" value="1" checked>1
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="diskId" value="2">2
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="diskId" value="3">3
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">文件类型</label>
+						<div class="col-sm-6">
+							<label class="radio-inline">
+								<input type="radio" name="fileType" id="fileType" value="bz2" checked>bz2
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">文件夹路径</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name="filePath" required>
+						</div>
+						<div class="col-sm-2">
+							<input type="button" class="btn btn-primary" value="添加文件路径" onclick="addPath()">
+						</div>
+					</div>
+					<div id="folders">
+						<!-- <div class="form-group" id="other">
+							<div class="col-sm-offset-2 col-sm-6">
+								<input type="text" class="form-control" name="filePath">
+							</div>
+							<div class="col-sm-2">
+								<input type="button" class="btn btn-primary" value="-" onclick="removePath(document.getElementById('other'))">
+							</div>
+						</div> -->
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-success">上传</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../assets/exts/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/exts/bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		var id = 0;
+
+		function addPath() {
+			id++;
+			var path = 'path' + id;
+			var tag = document.getElementById('folders');
+			var html = '<div class="form-group" id="' + path + '"><div class="col-sm-offset-2 col-sm-6"><input type="text" class="form-control" name="filePath" required></div><div class="col-sm-2"><input type="button" class="btn btn-primary" value="-" onclick="removePath(' + path + ')"></div></div>'
+			tag.innerHTML += html;
+		}
+
+		function removePath(tag) {
+			console.log(tag);
+			var other = document.getElementById('folders');
+			other.removeChild(tag);
+		}
+	</script>
+	<script type="text/javascript">
+		/*$("input").blur(function(){
+			$("input").css("background-color","#D6D6FF");
+		});*/
+	</script>
+</body>
+</html>

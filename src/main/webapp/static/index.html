@@ -1,0 +1,125 @@
+<html><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+
+	<link rel="stylesheet" href="http://localhost:8080/nlp-learn/assets/exts/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://localhost:8080/nlp-learn/assets/css/footer.css">
+	<link rel="stylesheet" href="http://localhost:8080/nlp-learn/assets/css/word.css">
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">开放式信息抽取原型系统</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#segment" onclick="segmentPage()">分词标注</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" style="margin: 30px;">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<textarea rows="7" id="text" class="col-md-10 col-md-offset-1" style="font-size:16px;">阿里巴巴网络技术有限公司（简称：阿里巴巴集团）是以曾担任英语教师的马云为首的18人，于1999年在杭州创立。
+
+南京长江大桥位于南京市鼓楼区下关和浦口区桥北之间。
+
+岳麓书院是古代传统书院建筑，属于中国历史上著名的四大书院之一。位于湖南省长沙市湘江西岸的岳麓山风景区岳麓山东面山下。
+</textarea>
+			</div>
+		</div>
+		<div class="row" style="margin-top:20px;">
+			<div class="col-md-2 col-md-offset-5">
+				<button type="submit" class="btn btn-primary">分词标注</button>
+			</div>
+		</div>
+		<div class="col-md-10 col-md-offset-2" style="margin:20px;">
+			<div class="row" id="detail">
+				<div class="col-md-2 col-md-offset-1">
+					<p><span class="n">名词</span><span class="v">动词</span><span class="p">介词</span></p>
+					<p><span class="k">后缀</span><span class="r">代词</span><span class="m">数词</span></p>
+					<p><span class="c">连词</span><span class="u">助词</span><span class="e">叹词</span></p>
+					<p><span class="h">前缀</span><span class="q">量词</span><span class="d">副词</span></p>
+					<p><span class="y">语气词</span><span class="o">拟声词</span></p>
+					<p><span class="x">字符串</span><span class="a">形容词</span></p>
+					<p><span class="t">时间词</span><span class="s">处所词</span></p>
+					<p><span class="b">区别词</span><span class="f">方位词</span></p>
+					<p><span class="z">状态词</span><span class="w">标点符号</span></p>
+					<p><span class="other">自定义词</span></p>
+				</div>
+				<div class="col-md-9">
+					<div id="content" style="overflow-y: auto; height: 300px; border: 2px #b8b8b8 solid;">
+						<div style="margin:10px"><span class="n">阿里/ns</span><span class="n">巴巴/nrf</span><span class="n">网络/n</span><span class="n">技术/n</span><span class="n">有限公司/n</span><span class="w">（/w</span><span class="v">简称/v</span><span class="w">：/w</span><span class="n">阿里/ns</span><span class="n">巴巴/nrf</span><span class="n">集团/n</span><span class="w">）/w</span><span class="v">是/v</span><span class="p">以/p</span><span class="d">曾/d</span><span class="v">担任/v</span><span class="n">英语/nz</span><span class="n">教师/n</span><span class="u">的/uj</span><span class="n">马云/nr</span><span class="v">为首/v</span><span class="u">的/uj</span><span class="m">18/m</span><span class="n">人/n</span><span class="w">，/w</span><span class="p">于/p</span><span class="m">1999/m</span><span class="q">年/q</span><span class="p">在/p</span><span class="n">杭州/ns</span><span class="v">创立/v</span><span class="w">。/w</span><br><br><span class="n">南京/ns</span><span class="n">长江/ns</span><span class="n">大桥/n</span><span class="v">位于/v</span><span class="n">南京市/ns</span><span class="n">鼓楼区/ns</span><span class="n">下关/ns</span><span class="c">和/c</span><span class="n">浦口区/ns</span><span class="n">桥/n</span><span class="f">北/f</span><span class="f">之间/f</span><span class="w">。/w</span><br><br><span class="n">岳麓/nz</span><span class="n">书院/n</span><span class="v">是/v</span><span class="t">古代/t</span><span class="n">传统/n</span><span class="n">书院/n</span><span class="n">建筑/n</span><span class="w">，/w</span><span class="v">属于/v</span><span class="n">中国/ns</span><span class="n">历史/n</span><span class="f">上/f</span><span class="a">著名/a</span><span class="u">的/uj</span><span class="other">四大/j</span><span class="n">书院/n</span><span class="r">之一/r</span><span class="w">。/w</span><span class="v">位于/v</span><span class="n">湖南省/ns</span><span class="n">长沙市/ns</span><span class="n">湘江/ns</span><span class="s">西岸/s</span><span class="u">的/uj</span><span class="n">岳麓山/nz</span><span class="n">风景区/n</span><span class="n">岳麓/nz</span><span class="n">山东/ns</span><span class="q">面/q</span><span class="s">山下/s</span><span class="w">。/w</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="container-fluid">
+			<p class="text-muted">Copyright © 2017. All rights reserved.</p>
+		</div>
+	</footer>
+
+	<script type="text/javascript" src="http://localhost:8080/nlp-learn/assets/exts/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8080/nlp-learn/assets/exts/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$('#getBtn').click(function () {
+			var url = $('#url').val().trim();
+			if (url.length == 0) {
+				alert('URL is invalid. Please enter new one.');
+				$('#url').focus();
+				return;
+			}
+			console.log(url);
+			$.ajax({
+				type: 'POST',
+				url: '/nlp-learn/loadPage.action;jsessionid=70531BDAD56CC7F61AF53BCEA62293E3',
+				data: {'url': url},
+				success: function(result) {
+					console.log('get data from server')
+					if (result == '') {
+						alert('The URL does not contain text.')
+					} else {
+						$('#text').val(result);
+					}
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		function segmentPage() {
+			var text = $('#text').val().trim();
+			if (text == '') {
+				alert('text is empty.');
+				$('#text').focus();
+				return;
+			}
+			$.ajax({
+				type: 'POST',
+				url: '/nlp-learn/segment;jsessionid=70531BDAD56CC7F61AF53BCEA62293E3',
+				data: {'text': text},
+				success: function(result) {
+					console.log('get data from server')
+					if (result == '') {
+						alert('The URL does not contain text.')
+					} else {
+						$('#detail').html(result);
+					}
+				}
+			});
+		}
+	</script>
+
+</body></html>

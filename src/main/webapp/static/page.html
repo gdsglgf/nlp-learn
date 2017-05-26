@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+
+<!-- <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="../assets/exts/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/footer.css">
+<link rel="stylesheet" href="../assets/css/word.css">
+<style type="text/css">
+.tt {
+	/*width: 213px;
+	height: 124px;*/
+	border-radius: 10px;
+	margin-left: 5px;
+	margin-top: 5px;
+	font-size: 16px;
+}
+
+.tt>p {
+	padding-left: 10px;
+}
+</style>
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">NLP工具</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#segment">分词标注</a></li>
+					<li><a href="#entity">实体抽取</a></li>
+					<li><a href="#keyword">关键词提取</a></li>
+					<li><a href="#summary">摘要提取</a></li>
+					<li><a href="">词云图</a></li>
+					<li><a href="">帮助</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="jumbotron">
+			<div>
+				<textarea id="text" class="form-control" rows="15">中国最高检：2016年前十月检察机关信访量同比下降9.8%
+中新社北京3月3日电 （记者 张子扬）中国最高人民检察院控告检察厅厅长宫鸣3日在北京说，2016年1至10月，全国检察机关信访量同比下降9.8%，集体访、极端信访、缠访闹访均有不同程度下降，信访法治化观念逐渐深入人心，呈现出“弃访转法”的良好势头。
+宫鸣当日是在出席“看得见的正义”高端网络访谈时向媒体做出如上表述的。
+宫鸣说，“随着各项改革措施逐步落地生根见效，长期存在的入口不畅、程序空转、出口不顺等信访难题逐步得到破解。2016年，符合条件的信访导入程序数量同比上升9.6%，纠错和补正瑕疵案件同比上升12.9%，终结和建议终结案件同比上升八倍多，律师参与化解和代理涉法涉诉信访案件同比上升160.3%。”
+据宫鸣介绍，目前各省级检察院结合实际，在涉法涉诉信访案件导入、纠错、终结、司法救助、律师参与化解和代理涉法涉诉信访案件等方面，制定了一系列配套制度和内外部衔接互动机制，初步形成了较为完备的改革制度体系，为全面推进改革提供了强有力的制度保障。（完）
+责任编辑：吴颜
+文章关键词： 信访 最高检
+我要反馈 保存网页</textarea>
+			</div>
+			<p style="float: right; padding-top: 10px;">
+				<input style="width: 500px;" type="text" placeholder="URL"
+					name="url">
+				<button>抓取</button>
+			</p>
+		</div>
+
+		<div class="col-md-10 col-md-offset-1" style="margin-bottom: 30px;">
+			<div id="segment">
+				<h2>分词标注<input id="segToggleBtn" type="button" value="hide"><input id="segUpdateBtn" type="button" value="update">
+				</h2>
+			</div>
+			<div id="segContent" class="row">
+				<div class="col-md-2 col-md-offset-1">
+					<p>
+						<span class="n">名词</span><span class="v">动词</span><span class="p">介词</span>
+					</p>
+					<p>
+						<span class="k">后缀</span><span class="r">代词</span><span class="m">数词</span>
+					</p>
+					<p>
+						<span class="c">连词</span><span class="u">助词</span><span class="e">叹词</span>
+					</p>
+					<p>
+						<span class="h">前缀</span><span class="q">量词</span><span class="d">副词</span>
+					</p>
+					<p>
+						<span class="y">语气词</span><span class="o">拟声词</span>
+					</p>
+					<p>
+						<span class="x">字符串</span><span class="a">形容词</span>
+					</p>
+					<p>
+						<span class="t">时间词</span><span class="s">处所词</span>
+					</p>
+					<p>
+						<span class="b">区别词</span><span class="f">方位词</span>
+					</p>
+					<p>
+						<span class="z">状态词</span><span class="w">标点符号</span>
+					</p>
+					<p>
+						<span class="other">自定义词</span>
+					</p>
+				</div>
+				<div class="col-md-9">
+					<div
+						style="overflow-y: auto; height: 400px; border: 2px #b8b8b8 solid;">
+						<div style="margin: 10px">
+							<span class="n">中国/ns</span><span class="d">最/d</span><span
+								class="other">高检/j</span><span class="w">：/w</span><span
+								class="m">2016/m</span><span class="t">年前/t</span><span
+								class="t">十月/t</span><span class="b">检察/b</span><span class="n">机关/n</span><span
+								class="n">信访/n</span><span class="n">量/n</span><span
+								class="other">同比/j</span><span class="v">下降/v</span><span
+								class="m">9.8/m</span><span class="n">%/nx</span><span class="w">
+								/w</span><span class="n">中新社/nt</span><span class="n">北京/ns</span><span
+								class="m">3/m</span><span class="q">月/q</span><span class="m">3/m</span><span
+								class="other">日/j</span><span class="n">电/n</span><span
+								class="w"> /w</span><span class="w">（/w</span><span class="n">记者/n</span><span
+								class="w"> /w</span><span class="n">张子扬/nr</span><span class="w">）/w</span><span
+								class="n">中国/ns</span><span class="n">最高人民检察院/n</span><span
+								class="v">控告/v</span><span class="n">检察厅/nis</span><span
+								class="n">厅长/n</span><span class="n">宫鸣/nr</span><span class="m">3/m</span><span
+								class="other">日/j</span><span class="p">在/p</span><span
+								class="n">北京/ns</span><span class="v">说/v</span><span class="w">，/w</span><span
+								class="m">2016/m</span><span class="q">年/q</span><span class="m">1/m</span><span
+								class="p">至/p</span><span class="m">10/m</span><span class="q">月/q</span><span
+								class="w">，/w</span><span class="n">全国/n</span><span class="b">检察/b</span><span
+								class="n">机关/n</span><span class="n">信访/n</span><span class="n">量/n</span><span
+								class="other">同比/j</span><span class="v">下降/v</span><span
+								class="m">9.8/m</span><span class="n">%/nx</span><span class="w">，/w</span><span
+								class="n">集体/n</span><span class="v">访/v</span><span class="w">、/w</span><span
+								class="n">极端/n</span><span class="n">信访/n</span><span class="w">、/w</span><span
+								class="v">缠/v</span><span class="v">访/v</span><span class="n">闹访/nz</span><span
+								class="d">均/d</span><span class="v">有/v</span><span class="a">不同/a</span><span
+								class="n">程度/n</span><span class="v">下降/v</span><span class="w">，/w</span><span
+								class="n">信访/n</span><span class="v">法治化/v</span><span class="n">观念/n</span><span
+								class="d">逐渐/d</span><span class="other">深入人心/i</span><span
+								class="w">，/w</span><span class="v">呈现/v</span><span class="v">出/v</span><span
+								class="w">“/w</span><span class="v">弃/vg</span><span class="v">访/v</span><span
+								class="v">转/v</span><span class="other">法/j</span><span
+								class="w">”/w</span><span class="u">的/uj</span><span class="a">良好/a</span><span
+								class="n">势头/n</span><span class="w">。/w</span><span class="w">
+								/w</span><span class="n">宫鸣/nr</span><span class="t">当日/t</span><span
+								class="v">是/v</span><span class="p">在/p</span><span class="v">出席/v</span><span
+								class="w">“/w</span><span class="v">看得见/v</span><span class="u">的/uj</span><span
+								class="n">正义/n</span><span class="w">”/w</span><span class="n">高端/nz</span><span
+								class="n">网络/n</span><span class="v">访谈/vn</span><span class="n">时向/nr</span><span
+								class="n">媒体/n</span><span class="v">做出/v</span><span class="d">如上/d</span><span
+								class="v">表述/vn</span><span class="u">的/uj</span><span class="w">。/w</span><span
+								class="w"> /w</span><span class="n">宫鸣/nr</span><span class="v">说/v</span><span
+								class="w">，/w</span><span class="w">“/w</span><span class="p">随着/p</span><span
+								class="r">各项/r</span><span class="v">改革/vn</span><span class="n">措施/n</span><span
+								class="d">逐步/d</span><span class="v">落地生根/v</span><span
+								class="a">见效/a</span><span class="w">，/w</span><span class="d">长期/d</span><span
+								class="v">存在/v</span><span class="u">的/uj</span><span class="v">入口/vn</span><span
+								class="d">不/d</span><span class="a">畅/a</span><span class="w">、/w</span><span
+								class="n">程序/n</span><span class="v">空转/vn</span><span class="w">、/w</span><span
+								class="v">出口/vn</span><span class="v">不顺/v</span><span class="u">等/u</span><span
+								class="n">信访/n</span><span class="n">难题/n</span><span class="d">逐步/d</span><span
+								class="v">得到/v</span><span class="v">破解/v</span><span class="w">。/w</span><span
+								class="m">2016/m</span><span class="q">年/q</span><span class="w">，/w</span><span
+								class="v">符合/v</span><span class="n">条件/n</span><span class="u">的/uj</span><span
+								class="n">信访/n</span><span class="v">导入/v</span><span class="n">程序/n</span><span
+								class="n">数量/n</span><span class="other">同比/j</span><span
+								class="v">上升/v</span><span class="m">9.6/m</span><span class="n">%/nx</span><span
+								class="w">，/w</span><span class="v">纠错/vn</span><span class="c">和/c</span><span
+								class="n">补正/nz</span><span class="n">瑕疵/n</span><span class="n">案件/n</span><span
+								class="other">同比/j</span><span class="v">上升/v</span><span
+								class="m">12.9/m</span><span class="n">%/nx</span><span
+								class="w">，/w</span><span class="v">终结/v</span><span class="c">和/c</span><span
+								class="n">建议/n</span><span class="v">终结/v</span><span class="n">案件/n</span><span
+								class="other">同比/j</span><span class="v">上升/v</span><span
+								class="n">八倍/nz</span><span class="m">多/m</span><span class="w">，/w</span><span
+								class="n">律师/n</span><span class="v">参与/v</span><span class="v">化解/v</span><span
+								class="c">和/c</span><span class="v">代理/vn</span><span class="v">涉/vg</span><span
+								class="other">法/j</span><span class="v">涉/vg</span><span
+								class="v">诉/vg</span><span class="n">信访/n</span><span class="n">案件/n</span><span
+								class="other">同比/j</span><span class="v">上升/v</span><span
+								class="m">160.3/m</span><span class="n">%/nx</span><span
+								class="w">。/w</span><span class="w">”/w</span><span class="w">
+								/w</span><span class="p">据/p</span><span class="n">宫鸣/nr</span><span
+								class="v">介绍/v</span><span class="w">，/w</span><span class="t">目前/t</span><span
+								class="r">各/r</span><span class="b">省级/b</span><span class="n">检察院/n</span><span
+								class="v">结合/v</span><span class="n">实际/n</span><span class="w">，/w</span><span
+								class="p">在/p</span><span class="v">涉/vg</span><span
+								class="other">法/j</span><span class="v">涉/vg</span><span
+								class="v">诉/vg</span><span class="n">信访/n</span><span class="n">案件/n</span><span
+								class="v">导入/v</span><span class="w">、/w</span><span class="v">纠错/vn</span><span
+								class="w">、/w</span><span class="v">终结/v</span><span class="w">、/w</span><span
+								class="n">司法/n</span><span class="v">救助/v</span><span class="w">、/w</span><span
+								class="n">律师/n</span><span class="v">参与/v</span><span class="v">化解/v</span><span
+								class="c">和/c</span><span class="v">代理/vn</span><span class="v">涉/vg</span><span
+								class="other">法/j</span><span class="v">涉/vg</span><span
+								class="v">诉/vg</span><span class="n">信访/n</span><span class="n">案件/n</span><span
+								class="u">等/u</span><span class="n">方面/n</span><span class="w">，/w</span><span
+								class="v">制定/v</span><span class="u">了/ul</span><span class="b">一系列/b</span><span
+								class="a">配套/a</span><span class="n">制度/n</span><span class="c">和/c</span><span
+								class="n">内外部/n</span><span class="v">衔接/v</span><span class="v">互动/v</span><span
+								class="n">机制/n</span><span class="w">，/w</span><span class="d">初步/d</span><span
+								class="v">形成/v</span><span class="u">了/ul</span><span class="d">较为/d</span><span
+								class="a">完备/a</span><span class="u">的/uj</span><span class="v">改革/vn</span><span
+								class="n">制度/n</span><span class="n">体系/n</span><span class="w">，/w</span><span
+								class="p">为/p</span><span class="a">全面/ad</span><span class="v">推进改革/v</span><span
+								class="v">提供/v</span><span class="u">了/ul</span><span
+								class="other">强有力/l</span><span class="u">的/uj</span><span
+								class="n">制度/n</span><span class="v">保障/vn</span><span class="w">。/w</span><span
+								class="w">（/w</span><span class="v">完/v</span><span class="w">）/w</span><span
+								class="w"> /w</span><span class="n">责任/n</span><span class="n">编辑/n</span><span
+								class="w">：/w</span><span class="n">吴颜/nr</span><span class="w">
+								/w</span><span class="n">文章/n</span><span class="n">关键词/n</span><span
+								class="w">：/w</span><span class="w"> /w</span><span class="n">信访/n</span><span
+								class="w"> /w</span><span class="a">最高/a</span><span class="v">检/v</span><span
+								class="w"> /w</span><span class="r">我/r</span><span class="v">要/v</span><span
+								class="v">反馈/v</span><span class="w"> /w</span><span class="v">保存/v</span><span
+								class="n">网页/n</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="entity">
+				<h2>实体抽取<input id="entityToggleBtn" type="button" value="show"><input id="entityUpdateBtn" type="button" value="update">
+				</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<h3>人名</h3>
+					<div class="tt" style="background-color: #f48363;">
+						<p>宫鸣</p>
+						<p>张子扬</p>
+						<p>吴颜</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<h3>地名</h3>
+					<div class="tt" style="background-color: #ffcb99;">
+						<p>北京</p>
+						<p>中国</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<h3>机构名</h3>
+					<div class="tt" style="background-color: #99cc67;">
+						<p>中国最高人民检察院</p>
+					</div>
+				</div>
+			</div>
+
+			<div id="keyword">
+				<h2>关键字提取</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-4 tt" style="background-color: #488fce;">
+					<ul>
+						<li>2016年</li>
+						<li>宫鸣</li>
+						<li>案件同比上升</li>
+						<li>信访</li>
+						<li>改革</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="summary">
+				<h2>摘要提取</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div
+						style="overflow-y: auto; height: 200px; border: 2px #b8b8b8 solid; font-size: 16px;">中国最高检：2016年前十月检察机关信访量同比下降9.8%中新社北京3月3日电（记者张子扬）中国最高人民检察院控告检察厅厅长宫鸣3日在北京说，2016年1至10月，全国检察机关信访量同比下降9.8%，集体访、极端信访、缠访闹访均有不同程度下降，信访法治化观念逐渐深入人心，呈现出“弃访转法”的良好势头。</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="container-fluid">
+			<p class="text-muted">Copyright &copy; 2017. All rights reserved.</p>
+		</div>
+	</footer>
+	<!-- 
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	-->
+
+	<script type="text/javascript"
+		src="../assets/exts/jquery/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="../assets/exts/bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		var historyText = '';
+	</script>
+
+	<script type="text/javascript">
+		$('#segToggleBtn').click(function() {
+			if ($('#segContent').css('display') == 'none') {
+				$('#segToggleBtn').val('hide');
+				// $("#segContent").show();
+			} else {
+				$('#segToggleBtn').val('show');
+				// $("#segContent").hide();
+			}
+			$("#segContent").toggle();
+		});
+		$('#segUpdateBtn').click(function() {
+			if ($('#segContent').css('display') == 'none') {
+				$('#segToggleBtn').val('hide');
+				$("#segContent").show();
+			}
+			var text = $('#text').val();
+			if (text == historyText) {
+				alert('it is latest.')
+			} else {
+				alert('update data');
+				historyText = text;
+			}
+		});
+	</script>
+</body>
+</html>

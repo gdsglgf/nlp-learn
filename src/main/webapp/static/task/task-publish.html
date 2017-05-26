@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" href="../../assets/exts/bootstrap/css/bootstrap.min.css">
+	<style type="text/css">
+		th, td {text-align:center;}
+		.more-data {display: none;}
+		.doc-space {margin-left:10px;margin-right:10pt;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h2>发布信息抽取任务</h2>
+		</div>
+		<div class="row">
+			<div class="col-md-9" role="main">
+				<div class="bs-docs-section">
+					<form method="POST" onsubmit="onSubmit(); return false;">
+						<button type="button" id="selectAllBtn" class="btn btn-primary">全选</button>
+						<button type="button" id="inverSelectionBtn" class="doc-space btn btn-primary">反选</button>
+						<button type="button" id="cancleSelectionBtn" class="btn btn-primary">取消</button>
+						<table class="table table-striped">
+							<thead>
+								<th>#</th>
+								<th>文件编号</th>
+								<th>文件目录</th>
+								<th>文件名</th>
+								<th>文件字节数</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr class="more-data">
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr class="more-data">
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr class="more-data">
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr class="more-data">
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+								<tr class="more-data">
+									<td><input type="checkbox" name="fileId" value="1"></td>
+									<td>1</td>
+									<td>D:\data1</td>
+									<td>file1.bz2</td>
+									<td>5000</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="4"><button type="button" id="moreFileBtn" class="btn btn-primary">加载更多文件</button></td>
+								</tr>
+							</tfoot>
+						</table>
+						<button type="submit" class="btn btn-success">发布任务</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../assets/exts/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/exts/bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$('#moreFileBtn').click(function () {
+			$('.more-data').each(function(index, element) {
+				$(element).removeClass('more-data');  // dom对象转jquery对象
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$('#selectAllBtn').click(function() {
+			$('input[name="fileId"]').prop("checked", true);
+		});
+		$('#inverSelectionBtn').click(function() {
+			$('input[name="fileId"]').each(function() {
+				this.checked = !this.checked;
+			});
+		});
+		$('#cancleSelectionBtn').click(function() {
+			// $('input[name="fileId"]').prop("checked", false);
+			$('input[name="fileId"]').removeProp("checked");
+		});
+	</script>
+	<script type="text/javascript">
+		function onSubmit() {
+			var checked = $('input[name="fileId"]:checked');
+			if (checked.length == 0) {
+				alert('未选择要处理的文件');
+			} else {
+				var fileIds = []; 
+				checked.each( function(){ 
+					fileIds.push($(this).val());
+				});
+				console.log(fileIds);
+
+				doPublishAction(fileIds)
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		function doPublishAction(fileIds) {
+			var postData = {
+				'fileId': fileIds
+			};
+			$.ajax({
+				type: 'POST',
+				url: '<c:url value="/task/publish.action" />',
+				data: postData,
+				dataType: 'JSON',
+				success: function(result){
+					return processPublishResult(result);
+				}
+			});
+		}
+	</script>
+	<script type="text/javascript">
+		function processPublishResult(result) {
+			if ( result['isSuccessful'] ) {
+				var forwardUrl = '${forwardUrl}' || '<c:url value="/" />';
+				window.location.href = forwardUrl;
+			} else {
+				
+			}
+		}
+	</script>
+</body>
+</html>

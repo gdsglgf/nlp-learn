@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" href="../../assets/exts/bootstrap/css/bootstrap.min.css">
+	<style type="text/css">
+		.bs-docs-section {margin-bottom: 60px;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9" role="main">
+				<div class="bs-docs-section">
+					<h2 class="page-header">文件统计信息</h2>
+					<div>
+						<div id="container" style="min-width:400px;height:400px"></div>
+					</div>
+				</div>
+				<div class="bs-docs-section">
+					<h2 class="page-header">文件详细信息</h2>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>文件夹编号</th>
+								<th>目录路径</th>
+								<th>文件类型</th>
+								<th>文件个数</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>D:\data1</td>
+								<td>bz2</td>
+								<td>107</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>D:\data2</td>
+								<td>bz2</td>
+								<td>31</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>D:\data3</td>
+								<td>bz2</td>
+								<td>635</td>
+							</tr>
+							<tr>
+								<th scope="row">4</th>
+								<td>D:\data4</td>
+								<td>bz2</td>
+								<td>4096</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<a href="task-publish.html" class="btn btn-success">发布信息抽取任务</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../assets/exts/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/exts/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../assets/exts/highcharts/highcharts.js"></script>
+	<script type="text/javascript" src="../../assets/exts/highcharts/exporting.js"></script>
+	<script type="text/javascript" src="../../assets/exts/highcharts/highcharts-zh_CN.js"></script>
+
+	<script type="text/javascript">
+		$('#container').highcharts({
+		chart: {
+			type: 'bar'
+		},
+		title: {
+			text: '文件统计信息'
+		},
+		xAxis: {
+			categories: ['1', '2', '3', '4'],
+			title: {
+				text: '文件夹'
+			}
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: '文件个数 (个)',
+				align: 'high'
+			},
+			labels: {
+				overflow: 'justify'
+			}
+		},
+		tooltip: {
+			valueSuffix: ' 个'
+		},
+		plotOptions: {
+			bar: {
+				dataLabels: {
+					enabled: true,
+					allowOverlap: true
+				}
+			}
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'top',
+			x: -40,
+			y: 100,
+			floating: true,
+			borderWidth: 1,
+			backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+			shadow: true
+		},
+		credits: {
+			enabled: false
+		},
+		series: [{
+			name: '文件个数',
+			data: [107, 31, 635, 4096]
+		}]
+	});
+	</script>
+
+</body>
+</html>
