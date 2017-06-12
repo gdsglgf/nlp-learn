@@ -1,0 +1,1328 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+		<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="pingback" href="http://licstar.net/xmlrpc.php" />
+	<title>维基百科简体中文语料的获取 &#8211; licstar的博客</title>
+
+<script type='text/x-mathjax-config'>
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true}});
+</script>
+<link rel='dns-prefetch' href='//cdn.mathjax.org' />
+<link rel='dns-prefetch' href='//platform-api.sharethis.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="licstar的博客 &raquo; Feed" href="http://licstar.net/feed" />
+<link rel="alternate" type="application/rss+xml" title="licstar的博客 &raquo; 评论Feed" href="http://licstar.net/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="licstar的博客 &raquo; 维基百科简体中文语料的获取评论Feed" href="http://licstar.net/archives/262/feed" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/licstar.net\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.6.3"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='flat-fonts-css' href='//fonts.googleapis.com/css?family=Amatic+SC%7CRoboto:400,700%7CRoboto+Slab%7CRoboto+Condensed' media='all' />
+<link rel='stylesheet' id='flat-theme-css' href='http://licstar.net/wp-content/themes/flat/assets/css/flat.min.css?ver=1.7.6' media='all' />
+<link rel='stylesheet' id='flat-style-css' href='http://licstar.net/wp-content/themes/flat/style.css?ver=4.6.3' media='all' />
+<link rel='stylesheet' id='tablepress-default-css' href='http://licstar.net/wp-content/tablepress-combined.min.css?ver=1' media='all' />
+<link rel='stylesheet' id='aj-collapse-style-css' href='http://licstar.net/wp-content/plugins/adjustly-collapse/aj-collapse.css?ver=all' media='all' />
+<script src='//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2CSafe.js&#038;ver=4.6.3'></script>
+<script src='http://licstar.net/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script src='http://licstar.net/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script src='http://licstar.net/wp-content/themes/flat/assets/js/flat.min.js?ver=1.7.6'></script>
+<!--[if lt IE 9]>
+<script src='http://licstar.net/wp-content/themes/flat/assets/js/html5shiv.min.js?ver=3.7.2'></script>
+<![endif]-->
+<script src='//platform-api.sharethis.com/js/sharethis.js#product=ga&#038;property=58a1850f339cc50012f85588'></script>
+<script src='http://licstar.net/wp-content/plugins/adjustly-collapse/aj-collapse.js?ver=4.6.3'></script>
+<link rel='https://api.w.org/' href='http://licstar.net/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://licstar.net/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://licstar.net/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='我的数据可视化作品：好友关系图、北京吃货地图' href='http://licstar.net/archives/246' />
+<link rel='next' title='字符编码的那些事——原来C#、Java的一个char并不是对应一个显示字符' href='http://licstar.net/archives/282' />
+<meta name="generator" content="WordPress 4.6.3" />
+<link rel="canonical" href="http://licstar.net/archives/262" />
+<link rel='shortlink' href='http://licstar.net/?p=262' />
+<link rel="alternate" type="application/json+oembed" href="http://licstar.net/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flicstar.net%2Farchives%2F262" />
+<link rel="alternate" type="text/xml+oembed" href="http://licstar.net/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flicstar.net%2Farchives%2F262&#038;format=xml" />
+	<link href="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Styles/SyntaxHighlighter.css" type="text/css" rel="stylesheet" />
+	<script type='text/javascript'>
+                    var cwpCustomBarIcon = '';
+                    var isSetToPro = '';
+                    var trackcolor = '#ebebeb';
+                </script><style type="text/css"></style><style type="text/css">#masthead .site-title {font-family:Amatic SC}body {font-family:Roboto }h1,h2,h3,h4,h5,h6 {font-family:Roboto Slab}#masthead .site-description, .hentry .entry-meta {font-family:Roboto Condensed}</style>		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<style type="text/css" id="custom-background-css">
+body.custom-background { background-image: url('http://licstar.net/wp-content/themes/flat/assets/img/default-background.jpg'); background-repeat: repeat; background-position: top left; background-attachment: scroll; }
+</style>
+	</head>
+
+<body class="single single-post postid-262 single-format-standard custom-background" itemscope itemtype="http://schema.org/WebPage">
+<div id="page">
+	<div class="container">
+		<div class="row row-offcanvas row-offcanvas-left">
+			<div id="secondary" class="col-lg-3">
+								<header id="masthead" class="site-header" role="banner">
+										<div class="hgroup">
+						<h1 class="site-title display-title"><a href="http://licstar.net/" title="licstar的博客" rel="home"><span itemprop="name">licstar的博客</span></a></h1><h2 itemprop="description" class="site-description">还是licstar的博客</h2>					</div>
+					<button type="button" class="btn btn-link hidden-lg toggle-sidebar" data-toggle="offcanvas" aria-label="Sidebar"><i class="fa fa-gear"></i></button>
+					<button type="button" class="btn btn-link hidden-lg toggle-navigation" aria-label="Navigation Menu"><i class="fa fa-bars"></i></button>
+					<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+						<div class="nav-menu"><ul><li class="page_item page-item-702"><a href="http://licstar.net/links">常用链接</a></li><li class="page_item page-item-2"><a href="http://licstar.net/about">关于</a></li></ul></div>
+					</nav>
+									</header>
+				
+				<div class="sidebar-offcanvas">
+					<div id="main-sidebar" class="widget-area" role="complementary">
+													<aside id="recent-posts-2" class="widget widget_recent_entries">
+								<h3 class='widget-title'>近期文章</h3>
+		<ul>
+					<li>
+				<a href="http://licstar.net/archives/754">狗池历险记（五）</a>
+						</li>
+					<li>
+				<a href="http://licstar.net/archives/742">狗池历险记（四）</a>
+						</li>
+					<li>
+				<a href="http://licstar.net/archives/717">狗池历险记（二、三）</a>
+						</li>
+					<li>
+				<a href="http://licstar.net/archives/647">狗池历险记（零、一）</a>
+						</li>
+					<li>
+				<a href="http://licstar.net/archives/687">博士论文《基于神经网络的词和文档语义向量表示方法研究》</a>
+						</li>
+				</ul>
+							</aside>
+							<aside id="categories-2" class="widget widget_categories">
+						<h3 class='widget-title'>分类目录</h3>
+		<ul>
+	<li class="cat-item cat-item-23"><a href="http://licstar.net/archives/category/acmicpc" >ACM-ICPC</a>
+</li>
+	<li class="cat-item cat-item-57"><a href="http://licstar.net/archives/category/programming/cc" >C/C++</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://licstar.net/archives/category/programming/csharp" >C#</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="http://licstar.net/archives/category/programming/js" >JavaScript</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://licstar.net/archives/category/%e5%bf%83%e6%83%85" >心情</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="http://licstar.net/archives/category/data-mining" >数据挖掘</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://licstar.net/archives/category/uncategorized" >未分类</a>
+</li>
+	<li class="cat-item cat-item-71"><a href="http://licstar.net/archives/category/%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1/%e7%9f%bf%e6%b1%a0" >矿池</a>
+</li>
+	<li class="cat-item cat-item-70"><a href="http://licstar.net/archives/category/%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1" >程序设计</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://licstar.net/archives/category/programming" >程序语言</a>
+</li>
+	<li class="cat-item cat-item-65"><a href="http://licstar.net/archives/category/%e7%ae%97%e6%b3%95" >算法</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="http://licstar.net/archives/category/%e8%87%aa%e7%84%b6%e8%af%ad%e8%a8%80%e5%a4%84%e7%90%86" >自然语言处理</a>
+</li>
+		</ul>
+					</aside>
+					<aside id="tag_cloud-3" class="widget widget_tag_cloud">
+						<h3 class='widget-title'>标签</h3>
+<div class="tagcloud"><a href='http://licstar.net/archives/tag/2-gram' class='tag-link-27 tag-link-position-1' title='1个话题' style='font-size: 8pt;'>2-gram</a>
+<a href='http://licstar.net/archives/tag/acm-icpc' class='tag-link-15 tag-link-position-2' title='1个话题' style='font-size: 8pt;'>ACM-ICPC</a>
+<a href='http://licstar.net/archives/tag/bug' class='tag-link-42 tag-link-position-3' title='1个话题' style='font-size: 8pt;'>BUG</a>
+<a href='http://licstar.net/archives/tag/csharp' class='tag-link-68 tag-link-position-4' title='4个话题' style='font-size: 22pt;'>C#</a>
+<a href='http://licstar.net/archives/tag/char' class='tag-link-51 tag-link-position-5' title='1个话题' style='font-size: 8pt;'>char</a>
+<a href='http://licstar.net/archives/tag/code-unit' class='tag-link-47 tag-link-position-6' title='1个话题' style='font-size: 8pt;'>code unit</a>
+<a href='http://licstar.net/archives/tag/cookiecontainer' class='tag-link-5 tag-link-position-7' title='1个话题' style='font-size: 8pt;'>CookieContainer</a>
+<a href='http://licstar.net/archives/tag/cookies' class='tag-link-6 tag-link-position-8' title='1个话题' style='font-size: 8pt;'>cookies</a>
+<a href='http://licstar.net/archives/tag/javascript' class='tag-link-9 tag-link-position-9' title='1个话题' style='font-size: 8pt;'>Javascript</a>
+<a href='http://licstar.net/archives/tag/kdd-cup' class='tag-link-34 tag-link-position-10' title='1个话题' style='font-size: 8pt;'>KDD Cup</a>
+<a href='http://licstar.net/archives/tag/pm2-5' class='tag-link-32 tag-link-position-11' title='1个话题' style='font-size: 8pt;'>PM2.5</a>
+<a href='http://licstar.net/archives/tag/topcoder' class='tag-link-38 tag-link-position-12' title='1个话题' style='font-size: 8pt;'>TopCoder</a>
+<a href='http://licstar.net/archives/tag/utf-8' class='tag-link-48 tag-link-position-13' title='1个话题' style='font-size: 8pt;'>UTF-8</a>
+<a href='http://licstar.net/archives/tag/utf-16' class='tag-link-49 tag-link-position-14' title='1个话题' style='font-size: 8pt;'>UTF-16</a>
+<a href='http://licstar.net/archives/tag/utf-32' class='tag-link-50 tag-link-position-15' title='1个话题' style='font-size: 8pt;'>UTF-32</a>
+<a href='http://licstar.net/archives/tag/wikipedia-extractor' class='tag-link-44 tag-link-position-16' title='1个话题' style='font-size: 8pt;'>Wikipedia Extractor</a>
+<a href='http://licstar.net/archives/tag/world-final' class='tag-link-14 tag-link-position-17' title='1个话题' style='font-size: 8pt;'>World Final</a>
+<a href='http://licstar.net/archives/tag/%e4%ba%8c%e5%85%83%e8%af%ad%e6%b3%95' class='tag-link-26 tag-link-position-18' title='1个话题' style='font-size: 8pt;'>二元语法</a>
+<a href='http://licstar.net/archives/tag/%e4%bf%a1%e6%81%af%e6%8a%bd%e5%8f%96' class='tag-link-19 tag-link-position-19' title='1个话题' style='font-size: 8pt;'>信息抽取</a>
+<a href='http://licstar.net/archives/tag/%e5%85%ac%e8%93%9d%e5%8c%97%e4%ba%ac' class='tag-link-31 tag-link-position-20' title='1个话题' style='font-size: 8pt;'>公蓝北京</a>
+<a href='http://licstar.net/archives/tag/%e5%88%86%e8%af%8d' class='tag-link-25 tag-link-position-21' title='1个话题' style='font-size: 8pt;'>分词</a>
+<a href='http://licstar.net/archives/tag/%e5%8c%97%e9%82%ae' class='tag-link-16 tag-link-position-22' title='1个话题' style='font-size: 8pt;'>北邮</a>
+<a href='http://licstar.net/archives/tag/%e5%8e%8b%e7%bc%a9' class='tag-link-37 tag-link-position-23' title='1个话题' style='font-size: 8pt;'>压缩</a>
+<a href='http://licstar.net/archives/tag/%e5%8f%82%e6%95%b0' class='tag-link-29 tag-link-position-24' title='2个话题' style='font-size: 14.3pt;'>参数</a>
+<a href='http://licstar.net/archives/tag/%e5%8f%af%e8%a7%86%e5%8c%96' class='tag-link-40 tag-link-position-25' title='2个话题' style='font-size: 14.3pt;'>可视化</a>
+<a href='http://licstar.net/archives/tag/%e5%b9%b3%e6%bb%91' class='tag-link-28 tag-link-position-26' title='1个话题' style='font-size: 8pt;'>平滑</a>
+<a href='http://licstar.net/archives/tag/%e5%ba%8f%e5%88%97%e5%8c%96' class='tag-link-7 tag-link-position-27' title='1个话题' style='font-size: 8pt;'>序列化</a>
+<a href='http://licstar.net/archives/tag/%e5%bf%83%e6%83%85' class='tag-link-67 tag-link-position-28' title='1个话题' style='font-size: 8pt;'>心情</a>
+<a href='http://licstar.net/archives/tag/%e6%8a%93%e5%8f%96' class='tag-link-41 tag-link-position-29' title='1个话题' style='font-size: 8pt;'>抓取</a>
+<a href='http://licstar.net/archives/tag/%e6%8a%bd%e8%b1%a1' class='tag-link-12 tag-link-position-30' title='1个话题' style='font-size: 8pt;'>抽象</a>
+<a href='http://licstar.net/archives/tag/%e6%95%b0%e6%8d%ae%e6%8c%96%e6%8e%98' class='tag-link-17 tag-link-position-31' title='4个话题' style='font-size: 22pt;'>数据挖掘</a>
+<a href='http://licstar.net/archives/tag/%e6%99%92%e4%bb%a3%e7%a0%81' class='tag-link-20 tag-link-position-32' title='1个话题' style='font-size: 8pt;'>晒代码</a>
+<a href='http://licstar.net/archives/tag/%e7%88%ac%e8%99%ab' class='tag-link-18 tag-link-position-33' title='2个话题' style='font-size: 14.3pt;'>爬虫</a>
+<a href='http://licstar.net/archives/tag/%e7%8a%80%e7%89%9b%e4%b9%a6' class='tag-link-11 tag-link-position-34' title='1个话题' style='font-size: 8pt;'>犀牛书</a>
+<a href='http://licstar.net/archives/tag/%e7%9f%bf%e6%b1%a0' class='tag-link-72 tag-link-position-35' title='3个话题' style='font-size: 18.5pt;'>矿池</a>
+<a href='http://licstar.net/archives/tag/%e7%a0%81%e5%85%83' class='tag-link-46 tag-link-position-36' title='1个话题' style='font-size: 8pt;'>码元</a>
+<a href='http://licstar.net/archives/tag/%e7%b9%81%e7%ae%80%e8%bd%ac%e6%8d%a2' class='tag-link-45 tag-link-position-37' title='1个话题' style='font-size: 8pt;'>繁简转换</a>
+<a href='http://licstar.net/archives/tag/%e7%bb%8f%e9%aa%8c' class='tag-link-35 tag-link-position-38' title='1个话题' style='font-size: 8pt;'>经验</a>
+<a href='http://licstar.net/archives/tag/%e7%bb%9f%e8%ae%a1' class='tag-link-33 tag-link-position-39' title='1个话题' style='font-size: 8pt;'>统计</a>
+<a href='http://licstar.net/archives/tag/%e7%bb%b4%e5%9f%ba%e7%99%be%e7%a7%91' class='tag-link-43 tag-link-position-40' title='1个话题' style='font-size: 8pt;'>维基百科</a>
+<a href='http://licstar.net/archives/tag/%e8%a7%86%e9%a2%91%e7%9b%b4%e6%92%ad' class='tag-link-13 tag-link-position-41' title='1个话题' style='font-size: 8pt;'>视频直播</a>
+<a href='http://licstar.net/archives/tag/%e8%af%8d%e5%90%91%e9%87%8f' class='tag-link-60 tag-link-position-42' title='3个话题' style='font-size: 18.5pt;'>词向量</a>
+<a href='http://licstar.net/archives/tag/%e9%97%ad%e5%8c%85' class='tag-link-10 tag-link-position-43' title='1个话题' style='font-size: 8pt;'>闭包</a>
+<a href='http://licstar.net/archives/tag/%e9%a3%8e%e8%93%9d%e5%8c%97%e4%ba%ac' class='tag-link-30 tag-link-position-44' title='1个话题' style='font-size: 8pt;'>风蓝北京</a>
+<a href='http://licstar.net/archives/tag/%e9%a9%ac%e6%8b%89%e6%9d%be' class='tag-link-39 tag-link-position-45' title='1个话题' style='font-size: 8pt;'>马拉松</a></div>
+					</aside>
+					<aside id="recent-comments-2" class="widget widget_recent_comments">
+						<h3 class='widget-title'>近期评论</h3>
+<ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">licstar</span>发表在《<a href="http://licstar.net/archives/687#comment-1521">博士论文《基于神经网络的词和文档语义向量表示方法研究》</a>》</li><li class="recentcomments"><span class="comment-author-link">licstar</span>发表在《<a href="http://licstar.net/archives/328#comment-1520">Deep Learning in NLP （一）词向量和语言模型</a>》</li><li class="recentcomments"><span class="comment-author-link">licstar</span>发表在《<a href="http://licstar.net/archives/687#comment-1519">博士论文《基于神经网络的词和文档语义向量表示方法研究》</a>》</li><li class="recentcomments"><span class="comment-author-link">reborn</span>发表在《<a href="http://licstar.net/archives/328#comment-1518">Deep Learning in NLP （一）词向量和语言模型</a>》</li><li class="recentcomments"><span class="comment-author-link">许根鹏</span>发表在《<a href="http://licstar.net/archives/687#comment-1517">博士论文《基于神经网络的词和文档语义向量表示方法研究》</a>》</li></ul>					</aside>
+					<aside id="archives-2" class="widget widget_archive">
+						<h3 class='widget-title'>文章归档</h3>
+		<ul>
+			<li><a href='http://licstar.net/archives/date/2017/01'>2017年一月</a></li>
+	<li><a href='http://licstar.net/archives/date/2016/12'>2016年十二月</a></li>
+	<li><a href='http://licstar.net/archives/date/2016/11'>2016年十一月</a></li>
+	<li><a href='http://licstar.net/archives/date/2016/05'>2016年五月</a></li>
+	<li><a href='http://licstar.net/archives/date/2016/02'>2016年二月</a></li>
+	<li><a href='http://licstar.net/archives/date/2015/07'>2015年七月</a></li>
+	<li><a href='http://licstar.net/archives/date/2014/04'>2014年四月</a></li>
+	<li><a href='http://licstar.net/archives/date/2013/07'>2013年七月</a></li>
+	<li><a href='http://licstar.net/archives/date/2013/05'>2013年五月</a></li>
+	<li><a href='http://licstar.net/archives/date/2013/04'>2013年四月</a></li>
+	<li><a href='http://licstar.net/archives/date/2013/01'>2013年一月</a></li>
+	<li><a href='http://licstar.net/archives/date/2012/07'>2012年七月</a></li>
+	<li><a href='http://licstar.net/archives/date/2012/04'>2012年四月</a></li>
+	<li><a href='http://licstar.net/archives/date/2012/03'>2012年三月</a></li>
+	<li><a href='http://licstar.net/archives/date/2012/02'>2012年二月</a></li>
+		</ul>
+							</aside>
+					<aside id="linkcat-66" class="widget widget_links">
+						<h3 class='widget-title'>友情链接</h3>
+
+	<ul class='xoxo blogroll'>
+<li><a href="http://bellastream.com/blog/">Bella Blog</a></li>
+<li><a href="http://www.xperseverance.net/blogs/">xlh Blog</a></li>
+<li><a href="http://diaorui.net/">刁瑞 Dora Blog</a></li>
+<li><a href="http://www.shuizilong.com/house/">小岛 Blog</a></li>
+
+	</ul>
+					</aside>
+
+											</div>
+				</div>
+			</div>
+
+						<div id="primary" class="content-area col-lg-9" itemprop="mainContentOfPage">
+							<div id="content" class="site-content" role="main" itemscope itemtype="http://schema.org/Article">
+			<article id="post-262" class="post-262 post type-post status-publish format-standard hentry category-24 tag-csharp tag-wikipedia-extractor tag-45 tag-43">
+	<header class="entry-header">
+		<h1 class="entry-title" itemprop="name">维基百科简体中文语料的获取</h1>
+							<div class="entry-meta"><span class="entry-date"><a href="http://licstar.net/archives/262" rel="bookmark"><time class="entry-date published" datetime="2013-04-04T20:35:39+00:00" itemprop="datepublished">2013 年 4 月 4 日</time></a></span> by <span class="author vcard" itemscope itemprop="author" itemtype="http://schema.org/Person"><a class="url fn n" href="http://licstar.net/archives/author/licstar" rel="author" itemprop="url"><span itemprop="name">licstar</span></a></span><span class="sep">&middot;</span><span class="comments-link"><a href="http://licstar.net/archives/262#comments" itemprop="discussionUrl">39条评论</a></span></div>
+			</header>
+		
+	
+	<div class="entry-content" itemprop="articleBody">
+				<p>　　最近做实验需要较大规模的中文语料，很自然的就想到使用维基百科的中文数据。</p>
+<p>　　使用维基百科做训练语料有很多好处：</p>
+<ol>
+<li>维基百科资源获取非常方便，有 Wiki Dump 可以直接下载，所有的最新备份都在里面。最近的一次备份是3月底，也就是5天前。相比之下，其他很多语料都需要用爬虫抓取，或者付费获得。</li>
+<li>维基百科的文档解析有非常多的成熟工具，直接使用开源工具即可完成正文的提取。</li>
+<li>维基百科的质量较高，而且领域广泛（比较适合我要做的问题）。</li>
+</ol>
+<p>　　当然，缺点也有：最主要的就是数量较少，相比国内的百度百科、互动百科等，数据量要少一个数量级。</p>
+<p>　　直接切入正题。<br />
+　　<br />
+<h1>第一步，下载中文的 Wiki Dump</h1>
+<p>　　链接是：<a href="http://download.wikipedia.com/zhwiki/latest/zhwiki-latest-pages-articles.xml.bz2" title="http://download.wikipedia.com/zhwiki/latest/zhwiki-latest-pages-articles.xml.bz2" target="_blank">http://download.wikipedia.com/zhwiki/latest/zhwiki-latest-pages-articles.xml.bz2</a>。这个压缩包里面存的是标题、正文部分，如果需要其他数据，如页面跳转、历史编辑记录等，可以到目录下找别的下载链接。<br />
+　　<br />
+<h1>第二步，使用 <a href="http://medialab.di.unipi.it/wiki/Wikipedia_Extractor" title="Wikipedia Extractor" target="_blank">Wikipedia Extractor</a> 抽取正文文本</h1>
+<p>　　Wikipedia Extractor 是意大利人用 Python 写的一个维基百科抽取器，使用非常方便。下载之后直接使用这条命令即可完成抽取，运行了大约半小时的时间。<br />
+　　<strong>bzcat zhwiki-latest-pages-articles.xml.bz2 | python WikiExtractor.py -b1000M -o extracted >output.txt</strong><br />
+　　参数 -b1000M 表示以 1000M 为单位切分文件，默认是 500K。由于最后生成的正文文本不到 600M，把参数设置的大一些可以保证最后的抽取结果全部存在一个文件里。<br />
+　　<br />
+<h1>第三步，繁简转换</h1>
+<p>　　维基百科的中文数据是繁简混杂的，里面包含大陆简体、台湾繁体、港澳繁体等多种不同的数据。有时候在一篇文章的不同段落间也会使用不同的繁简字。<br />
+　　解决这个问题最佳的办法应该是直接使用维基百科自身的繁简转换方法（参照 <a href="http://zh.wikipedia.org/wiki/Wikipedia:%E7%B9%81%E7%AE%80%E5%A4%84%E7%90%86" target="_blank">http://zh.wikipedia.org/wiki/Wikipedia:繁简处理</a>）。不过维基百科网站虽然是开源的，但要把里面的繁简转换功能拆解出来，有一定的难度。<br />
+　　为了方便起见，我直接使用了开源项目 opencc。参照<a href="https://code.google.com/p/opencc/wiki/Install" target="_blank">安装说明</a>的方法，安装完成之后，使用下面的命令进行繁简转换，整个过程大约需要1分钟。（<a href="https://github.com/BYVoid/OpenCC" target="_blank">opencc新地址</a> 2016-10-11更新）<br />
+　　<strong>opencc -i wiki_00 -o wiki_chs -c zht2zhs.ini</strong><br />
+　　命令中的 wiki_00 这个文件是此前使用 Wikipedia Extractor 得到的。</p>
+<p>　　到此为止，已经完成了大部分繁简转换工作。实际上，维基百科使用的繁简转换方法是以词表为准，外加人工修正。人工修正之后的文字是这种格式，多数是为了解决各地术语名称不同的问题：</p>
+<blockquote><p>他的主要成就包括Emacs及後來的GNU Emacs，GNU C 編譯器及-{zh-hant:GNU 除錯器;zh-hans:GDB 调试器}-。</p></blockquote>
+<p>　　对付这种可以简单的使用正则表达式来解决。一般简体中文的限定词是 zh-hans 或 zh-cn，在C#中用以下代码即可完成替换：</p>
+<pre name="code" class="c#">s = Regex.Replace(s, @"-\{.*?(zh-hans|zh-cn):([^;]*?);.*?\}-", @"$2");</pre>
+<p>　　由于 Wikipedia Extractor 抽取正文时，会将有特殊标记的外文直接剔除，最后形成类似这样的正文：</p>
+<blockquote><p>西方语言中“数学”（；）一词源自于古希腊语的（）</p></blockquote>
+<p>　　虽然上面这句话是读不通的，但鉴于这种句子对我要处理的问题影响不大，就暂且忽略了。最后再将「」｢｣『』这些符号替换成引号，顺便删除空括号，就大功告成了！</p>
+<p>　　通过上述方法得到的维基百科简体中文纯文本语料约 528M。</p>
+							</div>
+		<div class="tags-links"><a href="http://licstar.net/archives/tag/csharp" rel="tag">C#</a> <a href="http://licstar.net/archives/tag/wikipedia-extractor" rel="tag">Wikipedia Extractor</a> <a href="http://licstar.net/archives/tag/%e7%b9%81%e7%ae%80%e8%bd%ac%e6%8d%a2" rel="tag">繁简转换</a> <a href="http://licstar.net/archives/tag/%e7%bb%b4%e5%9f%ba%e7%99%be%e7%a7%91" rel="tag">维基百科</a></div></article>
+	
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">文章导航</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="http://licstar.net/archives/246" rel="prev"><span class="meta-nav" aria-hidden="true">上一</span> <span class="screen-reader-text">上篇文章：</span> <span class="post-title">我的数据可视化作品：好友关系图、北京吃货地图</span></a></div><div class="nav-next"><a href="http://licstar.net/archives/282" rel="next"><span class="meta-nav" aria-hidden="true">继续</span> <span class="screen-reader-text">下篇文章：</span> <span class="post-title">字符编码的那些事——原来C#、Java的一个char并不是对应一个显示字符</span></a></div></div>
+	</nav>
+
+<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			<span itemprop="interactionCount">39</span> 评论		</h2>
+
+		<ol class="comment-list">
+					<li id="comment-837" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-837" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/08cb6241910beab1517179c62d68653e?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/08cb6241910beab1517179c62d68653e?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">Yih-Ru Wang</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-837">
+							<time datetime="2013-04-29T17:53:58+00:00">
+								2013 年 4 月 29 日 下午 5:53							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Wiki中的正则表达式我可以使用perl來置換嗎<br />
+我不想再回到PC處理</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=837#respond' onclick='return addComment.moveForm( "div-comment-837", "837", "respond", "262" )' aria-label='回复给Yih-Ru Wang'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-847" class="comment byuser comment-author-licstar bypostauthor odd alt depth-2">
+			<article id="div-comment-847" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-847">
+							<time datetime="2013-05-05T22:52:37+00:00">
+								2013 年 5 月 5 日 下午 10:52							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>肯定可以用perl的。不过我不会perl，没法把C#那段代码改过去。</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=847#respond' onclick='return addComment.moveForm( "div-comment-847", "847", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-913" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-913" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01e17bf3f11f1de5c09ab76d304ccf94?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01e17bf3f11f1de5c09ab76d304ccf94?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">peggy</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-913">
+							<time datetime="2013-06-14T11:33:30+00:00">
+								2013 年 6 月 14 日 上午 11:33							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>我下载了两个文件 运行bzcat zhwiki-latest-pages-articles.xml.bz2 | python WikiExtractor.py -b1000M -o extracted &gt;output.txt命令的时候 显示的是 少参数 是还要传wikidump和outputdir两个参数吗 这两个参数应该写什么</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=913#respond' onclick='return addComment.moveForm( "div-comment-913", "913", "respond", "262" )' aria-label='回复给peggy'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-926" class="comment byuser comment-author-licstar bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-926" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-926">
+							<time datetime="2013-06-21T22:07:33+00:00">
+								2013 年 6 月 21 日 下午 10:07							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>wikidump就是前面的输入，outputdir是extracted。应该能正常运行才是。我用的时候就用的这个命令，一字不差。不知道你那具体的提示是什么呢？</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=926#respond' onclick='return addComment.moveForm( "div-comment-926", "926", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1237" class="comment even depth-3 parent">
+			<article id="div-comment-1237" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/0574c3a33e12d354223d81ec6da6d886?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/0574c3a33e12d354223d81ec6da6d886?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">安可</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1237">
+							<time datetime="2015-04-20T14:01:31+00:00">
+								2015 年 4 月 20 日 下午 2:01							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>我跟他的是一样的错误：<br />
+[hadoop@master wiki]$ bzcat zhwiki-latest-pages-articles.xml.bz2 | python WikiExtractor.py -b1000M -o extracted &gt; output.txt<br />
+usage: WikiExtractor.py [-h] [-o OUTPUT] [-b n[KMG]] [-B BASE] [-c] [-l]<br />
+                        [-ns ns1,ns2] [-q] [&#8211;debug] [-s] [-a]<br />
+                        [&#8211;templates TEMPLATES] [&#8211;no-templates]<br />
+                        [&#8211;threads THREADS] [-v]<br />
+                        input<br />
+WikiExtractor.py: error: too few arguments</p>
+<p>现在WikiExtractor.py和压缩文件都在这个目录下运行的</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1237#respond' onclick='return addComment.moveForm( "div-comment-1237", "1237", "respond", "262" )' aria-label='回复给安可'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1245" class="comment byuser comment-author-licstar bypostauthor odd alt depth-4 parent">
+			<article id="div-comment-1245" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1245">
+							<time datetime="2015-06-06T00:18:52+00:00">
+								2015 年 6 月 6 日 上午 12:18							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>这下真不知道了，我这里没这个问题。如果需要我可以把我转换好的发给你。</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1245#respond' onclick='return addComment.moveForm( "div-comment-1245", "1245", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1274" class="comment even depth-5 parent">
+			<article id="div-comment-1274" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/4de19e65c1825d20228341db29b5d29a?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/4de19e65c1825d20228341db29b5d29a?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">Unknown0Zero</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1274">
+							<time datetime="2015-07-27T15:19:03+00:00">
+								2015 年 7 月 27 日 下午 3:19							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>能不能也发给我一份转换好的 谢谢了</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-1281" class="comment byuser comment-author-licstar bypostauthor odd alt depth-5">
+			<article id="div-comment-1281" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1281">
+							<time datetime="2015-07-29T12:50:40+00:00">
+								2015 年 7 月 29 日 下午 12:50							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>链接: <a href="http://pan.baidu.com/s/1dDxwF3j" rel="nofollow">http://pan.baidu.com/s/1dDxwF3j</a> 密码: v9da</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-1319" class="comment even depth-5 parent">
+			<article id="div-comment-1319" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/6189a974044732fa1e60aaa5e13e2bb2?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/6189a974044732fa1e60aaa5e13e2bb2?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn"><a href='http://新浪' rel='external nofollow' class='url'>琪琪王</a></b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1319">
+							<time datetime="2015-11-11T10:57:43+00:00">
+								2015 年 11 月 11 日 上午 10:57							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>您好，您转换好的能发一份给我吗？谢谢<br />
+<a href="mailto:648127199@qq.com">648127199@qq.com</a></p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-1337" class="comment byuser comment-author-licstar bypostauthor odd alt depth-5">
+			<article id="div-comment-1337" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1337">
+							<time datetime="2016-01-03T02:45:21+00:00">
+								2016 年 1 月 3 日 上午 2:45							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>放到网盘了<br />
+链接:<a href="http://pan.baidu.com/s/1dDxwF3j" rel="nofollow">http://pan.baidu.com/s/1dDxwF3j</a> 密码:v9da</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1290" class="comment even depth-4 parent">
+			<article id="div-comment-1290" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/e10814e3811d2745bbfa54a0ecef6037?s=80&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/e10814e3811d2745bbfa54a0ecef6037?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">呵呵</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1290">
+							<time datetime="2015-08-28T08:51:53+00:00">
+								2015 年 8 月 28 日 上午 8:51							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>先解压，再用WikiExtractor处理。解压用bunzip2 文件名<br />
+再用python WikiExtractor.py 文件名 -b1000M -o extracted&gt;output.txt</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1290#respond' onclick='return addComment.moveForm( "div-comment-1290", "1290", "respond", "262" )' aria-label='回复给呵呵'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1348" class="comment odd alt depth-5 parent">
+			<article id="div-comment-1348" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/62d3cd4567912497978055a98c929923?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/62d3cd4567912497978055a98c929923?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">吕荣荣</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1348">
+							<time datetime="2016-02-06T21:18:07+00:00">
+								2016 年 2 月 6 日 下午 9:18							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>文件下载下来没有后缀啊，怎么办</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-1349" class="comment byuser comment-author-licstar bypostauthor even depth-5">
+			<article id="div-comment-1349" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1349">
+							<time datetime="2016-02-15T09:18:21+00:00">
+								2016 年 2 月 15 日 上午 9:18							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>看看下载链接是什么文件名，然后自己加个后缀。可能是bz2压缩格式或者文本格式吧。</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1359" class="comment odd alt depth-2">
+			<article id="div-comment-1359" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/4ea1c82cf54141108a6d5de2eda7a5ca?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/4ea1c82cf54141108a6d5de2eda7a5ca?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn"><a href='http://helmz.net' rel='external nofollow' class='url'>helm</a></b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1359">
+							<time datetime="2016-03-07T14:38:40+00:00">
+								2016 年 3 月 7 日 下午 2:38							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>-b1000M 这边选项和参数在一块才报错的，没人说提一下吧，万一还有人这样 😉</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1359#respond' onclick='return addComment.moveForm( "div-comment-1359", "1359", "respond", "262" )' aria-label='回复给helm'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1044" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-1044" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/225f9afc7ca06195ab769d3a782de7ba?s=80&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/225f9afc7ca06195ab769d3a782de7ba?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">gavin</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1044">
+							<time datetime="2013-08-08T13:48:05+00:00">
+								2013 年 8 月 8 日 下午 1:48							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>我在redhat里面能用opencc吗？</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1044#respond' onclick='return addComment.moveForm( "div-comment-1044", "1044", "respond", "262" )' aria-label='回复给gavin'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1047" class="comment byuser comment-author-licstar bypostauthor odd alt depth-2">
+			<article id="div-comment-1047" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1047">
+							<time datetime="2013-08-19T22:43:27+00:00">
+								2013 年 8 月 19 日 下午 10:43							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Fedora可以，猜想redhat也可以吧</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1047#respond' onclick='return addComment.moveForm( "div-comment-1047", "1047", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1166" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-1166" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/dacc737e2425731a076a5abf65fdf294?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/dacc737e2425731a076a5abf65fdf294?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">小A</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1166">
+							<time datetime="2014-05-28T18:09:50+00:00">
+								2014 年 5 月 28 日 下午 6:09							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>用了同样读方法，得到的只有数字和名称如下面的格式：<br />
+13 数学<br />
+18 哲学<br />
+21 文學<br />
+22 历史<br />
+25 计算机科学<br />
+……<br />
+而且总共只有18M多<br />
+但是下载的dump里面明明有全文，不知道是为什么</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1166#respond' onclick='return addComment.moveForm( "div-comment-1166", "1166", "respond", "262" )' aria-label='回复给小A'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1175" class="comment byuser comment-author-licstar bypostauthor odd alt depth-2">
+			<article id="div-comment-1175" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1175">
+							<time datetime="2014-06-24T16:11:36+00:00">
+								2014 年 6 月 24 日 下午 4:11							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>没遇到过这个问题</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1175#respond' onclick='return addComment.moveForm( "div-comment-1175", "1175", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1197" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-1197" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">光阴的故事</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1197">
+							<time datetime="2014-11-28T10:34:57+00:00">
+								2014 年 11 月 28 日 上午 10:34							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>我不需要所有的资料，我只需要在维基百科上抓取包含某个关键字的一系列页面的正文，要怎么弄？求教啊</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1197#respond' onclick='return addComment.moveForm( "div-comment-1197", "1197", "respond", "262" )' aria-label='回复给光阴的故事'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1198" class="comment byuser comment-author-licstar bypostauthor odd alt depth-2">
+			<article id="div-comment-1198" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1198">
+							<time datetime="2014-12-03T21:32:14+00:00">
+								2014 年 12 月 3 日 下午 9:32							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>可能比较方便的就是爬搜索引擎吧。不过完整的语料也不大啊，解压之后也就若干G，下载下来挺快的。</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1198#respond' onclick='return addComment.moveForm( "div-comment-1198", "1198", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1201" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-1201" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">光阴的故事</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1201">
+							<time datetime="2014-12-10T15:17:17+00:00">
+								2014 年 12 月 10 日 下午 3:17							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>哦，谢谢啊，WikiExtractor.py怎么用啊？请教一下，谢谢</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1201#respond' onclick='return addComment.moveForm( "div-comment-1201", "1201", "respond", "262" )' aria-label='回复给光阴的故事'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1202" class="comment odd alt depth-2">
+			<article id="div-comment-1202" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">光阴的故事</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1202">
+							<time datetime="2014-12-10T15:22:22+00:00">
+								2014 年 12 月 10 日 下午 3:22							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>我下了python，但在dos中运行不了，</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1202#respond' onclick='return addComment.moveForm( "div-comment-1202", "1202", "respond", "262" )' aria-label='回复给光阴的故事'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1204" class="comment even thread-even depth-1">
+			<article id="div-comment-1204" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">光阴的故事</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1204">
+							<time datetime="2014-12-12T15:55:06+00:00">
+								2014 年 12 月 12 日 下午 3:55							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>是程序WikiExtractor.py不能执行</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1204#respond' onclick='return addComment.moveForm( "div-comment-1204", "1204", "respond", "262" )' aria-label='回复给光阴的故事'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-1209" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1209" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">光阴的故事</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1209">
+							<time datetime="2014-12-23T17:14:18+00:00">
+								2014 年 12 月 23 日 下午 5:14							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>运行WikiExtractor.py，输入命令没反应啊，咋回事？</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1209#respond' onclick='return addComment.moveForm( "div-comment-1209", "1209", "respond", "262" )' aria-label='回复给光阴的故事'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-1210" class="comment even thread-even depth-1">
+			<article id="div-comment-1210" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/71236d272456104e1aff94ce6aa1202b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">光阴的故事</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1210">
+							<time datetime="2014-12-23T17:15:30+00:00">
+								2014 年 12 月 23 日 下午 5:15							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>要不博主加个好友吧，帮帮忙咯</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1210#respond' onclick='return addComment.moveForm( "div-comment-1210", "1210", "respond", "262" )' aria-label='回复给光阴的故事'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-1235" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-1235" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/d433ca19affcd9539e3f6c00a6a0bb87?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/d433ca19affcd9539e3f6c00a6a0bb87?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">Samantha</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1235">
+							<time datetime="2015-03-29T14:55:43+00:00">
+								2015 年 3 月 29 日 下午 2:55							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>博主，我想问一下，我在繁体转简体时，安装那个opencc，安装好了，我输入opencc -i wiki.zh.text -o wiki.zh.text.jian -c zht2zhs.ini后，为什么出现了glibc detected***opencc :realloc():invalid next size&#8230;，得到的输出文件永远是空的，怎么回事呢？</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1235#respond' onclick='return addComment.moveForm( "div-comment-1235", "1235", "respond", "262" )' aria-label='回复给Samantha'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1249" class="comment byuser comment-author-licstar bypostauthor even depth-2">
+			<article id="div-comment-1249" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1249">
+							<time datetime="2015-06-06T00:34:29+00:00">
+								2015 年 6 月 6 日 上午 12:34							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>不太清楚，我没遇到过。你可以搜一下opencc的论坛，应该更有帮助。</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1249#respond' onclick='return addComment.moveForm( "div-comment-1249", "1249", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-1317" class="comment odd alt depth-2 parent">
+			<article id="div-comment-1317" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/85bf7c308dd7c31f6c99a787cf9f0a97?s=80&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/85bf7c308dd7c31f6c99a787cf9f0a97?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">hu</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1317">
+							<time datetime="2015-11-05T23:12:30+00:00">
+								2015 年 11 月 5 日 下午 11:12							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>你好 请问你的zht2zhs.ini 文件是如何设置的呢？<br />
+title = trad_to_simp<br />
+description = Standard Configuration for Conversion from Traditional Chinese to Simplified Chinese<br />
+dict0 = OCD trad_to_simp_phrases.ocd<br />
+dict0 = OCD trad_to_simp_characters.ocd<br />
+我设置成上面那样，可是执行之后，出现了下面的错误，谢谢了<br />
+Invalid format: Error parsing JSON</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1317#respond' onclick='return addComment.moveForm( "div-comment-1317", "1317", "respond", "262" )' aria-label='回复给hu'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1339" class="comment byuser comment-author-licstar bypostauthor even depth-3">
+			<article id="div-comment-1339" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1339">
+							<time datetime="2016-01-03T02:53:50+00:00">
+								2016 年 1 月 3 日 上午 2:53							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>我是用的是默认配置，没有修改过。opencc的问题可以到他的官网论坛提问，会有更好的解答。</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1339#respond' onclick='return addComment.moveForm( "div-comment-1339", "1339", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-1362" class="comment odd alt depth-3">
+			<article id="div-comment-1362" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/5c769850242203a2bb90231d4681d8f7?s=80&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/5c769850242203a2bb90231d4681d8f7?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">kdeng6728</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1362">
+							<time datetime="2016-03-10T04:15:45+00:00">
+								2016 年 3 月 10 日 上午 4:15							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>根据新版的OpenCC说明 <a href="https://github.com/BYVoid/OpenCC" rel="nofollow">https://github.com/BYVoid/OpenCC</a><br />
+繁体到简体的命令应该是 opencc -i wiki_00 -o wiki_chs -c t2s.json</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1362#respond' onclick='return addComment.moveForm( "div-comment-1362", "1362", "respond", "262" )' aria-label='回复给kdeng6728'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1238" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-1238" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/cba05b9d70e126512cb6f7b81b69af8f?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/cba05b9d70e126512cb6f7b81b69af8f?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">Wang Jilei</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1238">
+							<time datetime="2015-04-20T18:28:09+00:00">
+								2015 年 4 月 20 日 下午 6:28							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>哭了，楼主的半小时解析完xml是怎么办到的。。。我这儿都跑了19个小时了还在刷。。。现在刷到：</p>
+<p>INFO: 1606843   陈玉先<br />
+INFO: 1606848   格里特·尤拉克<br />
+INFO: 1606855   鎌倉七口<br />
+INFO: 1606860   變身男女Chok Chok Chok</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1238#respond' onclick='return addComment.moveForm( "div-comment-1238", "1238", "respond", "262" )' aria-label='回复给Wang Jilei'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1244" class="comment byuser comment-author-licstar bypostauthor odd alt depth-2">
+			<article id="div-comment-1244" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1244">
+							<time datetime="2015-06-06T00:02:29+00:00">
+								2015 年 6 月 6 日 上午 12:02							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>呃，我也不知道。。。等等吧。。。</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1244#respond' onclick='return addComment.moveForm( "div-comment-1244", "1244", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1376" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-1376" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/9bd1768c91d509c8c49970e9fd7775a5?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/9bd1768c91d509c8c49970e9fd7775a5?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">王路</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1376">
+							<time datetime="2016-04-22T14:18:13+00:00">
+								2016 年 4 月 22 日 下午 2:18							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>您好 我下载了转好的语料  但是解压之后没有后缀 显示是文件类型  应该如何处理呢</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1376#respond' onclick='return addComment.moveForm( "div-comment-1376", "1376", "respond", "262" )' aria-label='回复给王路'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1381" class="comment byuser comment-author-licstar bypostauthor odd alt depth-2">
+			<article id="div-comment-1381" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1381">
+							<time datetime="2016-05-04T21:36:39+00:00">
+								2016 年 5 月 4 日 下午 9:36							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>一般都是文本文件吧，如果不是的话，随便加个.zip之类的后缀，看看能不能解压缩。</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1381#respond' onclick='return addComment.moveForm( "div-comment-1381", "1381", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1401" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-1401" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/4657d00b52c9e790582689b487c3ce4a?s=80&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/4657d00b52c9e790582689b487c3ce4a?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">OS</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1401">
+							<time datetime="2016-05-27T14:24:55+00:00">
+								2016 年 5 月 27 日 下午 2:24							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>楼主 opencc具体是怎么使用的</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1401#respond' onclick='return addComment.moveForm( "div-comment-1401", "1401", "respond", "262" )' aria-label='回复给OS'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1440" class="comment byuser comment-author-licstar bypostauthor odd alt depth-2">
+			<article id="div-comment-1440" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1440">
+							<time datetime="2016-10-11T11:29:04+00:00">
+								2016 年 10 月 11 日 上午 11:29							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p><a href="https://github.com/BYVoid/OpenCC" rel="nofollow">https://github.com/BYVoid/OpenCC</a><br />
+可以看一下文档，里面介绍的很详细。</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1440#respond' onclick='return addComment.moveForm( "div-comment-1440", "1440", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1422" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-1422" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/29478c500d17615dcb1b73e233618e2e?s=80&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/29478c500d17615dcb1b73e233618e2e?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">huanghao</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1422">
+							<time datetime="2016-08-04T09:20:28+00:00">
+								2016 年 8 月 4 日 上午 9:20							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>是用的Python2，还是Python3。我也是这个错误<br />
+WikiExtractor.py -b1000M -o extracted &gt; output.txt<br />
+usage: WikiExtractor.py [-h] [-o OUTPUT] [-b n[KMG]] [-B BASE] [-c] [-l]<br />
+[-ns ns1,ns2] [-q] [–debug] [-s] [-a]<br />
+[–templates TEMPLATES] [–no-templates]<br />
+[–threads THREADS] [-v]<br />
+input<br />
+WikiExtractor.py: error: too few arguments</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1422#respond' onclick='return addComment.moveForm( "div-comment-1422", "1422", "respond", "262" )' aria-label='回复给huanghao'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1447" class="comment byuser comment-author-licstar bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-1447" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=80&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/fe1eb47379e85e26356aac9aed30e08b?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">licstar</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1447">
+							<time datetime="2016-10-11T11:44:04+00:00">
+								2016 年 10 月 11 日 上午 11:44							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>我当时用的是python2</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1447#respond' onclick='return addComment.moveForm( "div-comment-1447", "1447", "respond", "262" )' aria-label='回复给licstar'>回复</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-1465" class="comment even depth-3">
+			<article id="div-comment-1465" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/8c8112ec6407aa9f5fa4e6a20fcc5c80?s=80&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/8c8112ec6407aa9f5fa4e6a20fcc5c80?s=160&amp;d=mm&amp;r=g 2x' class='avatar avatar-80 photo' height='80' width='80' />						<b class="fn">lounily</b><span class="says">说道：</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://licstar.net/archives/262#comment-1465">
+							<time datetime="2016-10-24T15:21:15+00:00">
+								2016 年 10 月 24 日 下午 3:21							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>现在这个问题解决了吗？怎么解决的</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://licstar.net/archives/262?replytocom=1465#respond' onclick='return addComment.moveForm( "div-comment-1465", "1465", "respond", "262" )' aria-label='回复给lounily'>回复</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		</ol>
+
+		
+		
+	
+					<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/archives/262#respond" style="display:none;">取消回复</a></small></h3>				<form action="http://licstar.net/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+					<p class="comment-notes"><span id="email-notes">电子邮件地址不会被公开。</span> 必填项已用<span class="required">*</span>标注</p><p class="comment-form-comment"><label for="comment">评论</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required="required"></textarea></p><p class="comment-form-author"><label for="author">姓名 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" aria-required='true' required='required' /></p>
+<p class="comment-form-email"><label for="email">电子邮件 <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" aria-required='true' required='required' /></p>
+<p class="comment-form-url"><label for="url">站点</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论" /> <input type='hidden' name='comment_post_ID' value='262' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p>		<p class="antispam-group antispam-group-q" style="clear: both;">
+			<label>Current ye@r <span class="required">*</span></label>
+			<input type="hidden" name="antspm-a" class="antispam-control antispam-control-a" value="2017" />
+			<input type="text" name="antspm-q" class="antispam-control antispam-control-q" value="4.3" autocomplete="off" />
+		</p>
+		<p class="antispam-group antispam-group-e" style="display: none;">
+			<label>Leave this field empty</label>
+			<input type="text" name="antspm-e-email-url-website" class="antispam-control antispam-control-e" value="" autocomplete="off" />
+		</p>
+				</form>
+					</div><!-- #respond -->
+		
+	
+</div>
+
+			</div>
+											<footer class="site-info" itemscope itemtype="http://schema.org/WPFooter">
+										<a href="http://cn.wordpress.org/" title="优雅的个人发布平台">由WordPress自豪地提供</a>.
+					主题：Flat 1.7.6 by <a rel="nofollow" href="https://themeisle.com/themes/flat/" title="Flat WordPress Theme">Themeisle</a>				</footer>
+														</div>
+					</div>
+	</div>
+</div>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shCore.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCSharp.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushPhp.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushJScript.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushJava.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushVb.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushSql.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushXml.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushDelphi.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushPython.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushRuby.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCss.js"></script>
+<script class="javascript" src="http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCpp.js"></script>
+<script class="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = 'http://licstar.net/wp-content/plugins/google-syntax-highlighter/Scripts/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+	<style type="text/css">
+
+		@media (min-width: 820px) {
+			#review-statistics .review-wrap-up .review-wu-left .rev-wu-image, #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+				height: 156.88px;
+			}
+
+			#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
+
+				margin-top: 14.688%;
+			}
+
+			#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart span {
+				font-size: 31px;
+			}
+
+		
+		}
+
+		#review-statistics .review-wrap-up div.cwpr-review-top {
+			border-top: 5px solid #3BAEDA;
+		}
+
+		.user-comments-grades .comment-meta-grade-bar,
+		#review-statistics .review-wu-bars ul li {
+			background: #E1E2E0;
+		}
+
+		#review-statistics .rev-option.customBarIcon ul li {
+			color: #E1E2E0;
+		}
+
+		#review-statistics .review-wrap-up .review-wu-right ul li, #review-statistics .review-wu-bars h3, .review-wu-bars span, #review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a {
+			color: #3D3D3D;
+		}
+
+		#review-statistics .review-wrap-up .review-wu-right .pros h2 {
+			color: #8DC153;
+		}
+
+		#review-statistics .review-wrap-up .review-wu-right .cons h2 {
+			color: #C15353;
+		}
+
+		div.affiliate-button a {
+			border: 2px solid #3BAEDA;
+		}
+
+		div.affiliate-button a:hover {
+			border: 2px solid #3BAEDA;
+		}
+
+		div.affiliate-button a {
+			background: #ffffff;
+		}
+
+		div.affiliate-button a:hover {
+			background: #3BAEDA;
+		}
+
+		div.affiliate-button a span {
+			color: #3BAEDA;
+		}
+
+		div.affiliate-button a:hover span {
+			color: #FFFFFF;
+		}
+
+				div.affiliate-button a span {
+			background: url("http://licstar.net/wp-content/plugins/wp-product-review/images/cart-icon.png") no-repeat left center;
+		}
+
+		div.affiliate-button a:hover span {
+			background: url("http://licstar.net/wp-content/plugins/wp-product-review/images/cart-icon-hover.png") no-repeat left center;
+		}
+
+		
+			</style>
+	<script type="text/javascript">
+		var c1 = "#FF7F66";
+		var c2 = "#FFCE55";
+		var c3 = "#50C1E9";
+		var c4 = "#8DC153";
+	</script>
+	<script>
+    jQuery(document).ready(function () {
+		jQuery.post('http://licstar.net?ga_action=googleanalytics_get_script', {action: 'googleanalytics_get_script'}, function(response) {
+			var F = new Function ( response );
+			return( F() );
+		});
+    });
+</script><script src='http://licstar.net/wp-content/plugins/anti-spam/js/anti-spam-4.3.js'></script>
+<script src='http://licstar.net/wp-includes/js/comment-reply.min.js?ver=4.6.3'></script>
+<script src='http://licstar.net/wp-includes/js/wp-embed.min.js?ver=4.6.3'></script>
+</body>
+</html>
+<!-- Dynamic page generated in 0.582 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2017-03-05 14:13:06 -->
+
+<!-- super cache -->

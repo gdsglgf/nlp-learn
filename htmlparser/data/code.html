@@ -1,0 +1,11 @@
+<table style="TABLE-LAYOUT: auto; LINE-HEIGHT: normal" cellspacing="1" cellpadding="1" width="700" border="1">
+<tbody style="LINE-HEIGHT: normal">
+<tr style="LINE-HEIGHT: normal">
+<td style="FONT-SIZE: 12px; FILTER: none; VISIBILITY: visible! important; WORD-BREAK: break-all; LINE-HEIGHT: normal; ZOOM: 1! important; FONT-FAMILY: Arial; WORD-WRAP: break-word">public static String getPlainText2(String str) {<br style="LINE-HEIGHT: normal">&nbsp;&nbsp;try {<br style="LINE-HEIGHT: normal">&nbsp;&nbsp;&nbsp;Parser parser = new Parser();<br style="LINE-HEIGHT: normal">&nbsp;&nbsp;&nbsp;parser.setInputHTML(str);
+<pre style="LINE-HEIGHT: normal"><font style="LINE-HEIGHT: normal" face="Arial">&nbsp;&nbsp;&nbsp;TextExtractingVisitor visitor = new TextExtractingVisitor();<br style="LINE-HEIGHT: normal">&nbsp;&nbsp;&nbsp;parser.visitAllNodesWith(visitor);<br style="LINE-HEIGHT: normal">&nbsp;&nbsp;&nbsp;str = visitor.getExtractedText();<br style="LINE-HEIGHT: normal">&nbsp;&nbsp;} catch (ParserException e) {<br style="LINE-HEIGHT: normal">&nbsp;&nbsp;&nbsp;log.error(e);<br style="LINE-HEIGHT: normal">&nbsp;&nbsp;}</font></pre>
+<pre style="LINE-HEIGHT: normal"><font style="LINE-HEIGHT: normal" face="Arial">&nbsp;&nbsp;return str;<br style="LINE-HEIGHT: normal">&nbsp;}
+            </font></pre>
+</td>
+</tr>
+</tbody>
+</table>

