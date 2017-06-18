@@ -1,0 +1,79 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nlp.mapper.TaskMapper">
+	<resultMap id="TaskItemResultMap" type="com.nlp.model.TaskItem">
+		<id property="itemId" column="item_id" />
+		<result property="taskId" column="task_id" />
+		<association property="file" column="file_id"
+			select="com.nlp.mapper.FileMapper.getFileById" />
+	</resultMap>
+	<resultMap id="TaskResultMap" type="com.nlp.model.Task">
+		<id property="taskId" column="task_id" />
+		<result property="pubTime" column="pub_time" />
+		<result property="lastModified" column="last_modified" />
+		<result property="endTime" column="end_time" />
+		<result property="status" column="status" />
+		<collection property="items" column="task_id"
+			select="com.nlp.mapper.TaskMapper.getItemListByTaskId" />
+	</resultMap>
+	
+	<insert id="createTask" 
+		parameterType="com.nlp.model.Task" 
+		flushCache="true" 
+		keyProperty="taskId" 
+		keyColumn="task_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_task (pub_time, last_modified, status) 
+		VALUES (#{pubTime}, #{lastModified}, #{status})
+	</insert>
+	
+	<update id="updateTask"
+		parameterType="com.nlp.model.Task">
+		UPDATE t_task SET end_time = #{endTime}, status = #{status} WHERE task_id = #{taskId}
+	</update>
+	
+	<insert id="createTaskItem" 
+		parameterType="com.nlp.model.TaskItem" 
+		flushCache="true" 
+		keyProperty="itemId" 
+		keyColumn="item_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_task_item (task_id, file_id) 
+		VALUES (#{taskId}, #{file.fileId})
+	</insert>
+	
+	<insert id="createTaskItemBatch">
+		INSERT INTO t_task_item (task_id, file_id) VALUES 
+		<foreach collection="fileIds" item="fileId" index="index" separator="," >
+			(#{taskId}, #{fileId})
+		</foreach>
+	</insert>
+	
+	<select id="getItemListByTaskId"
+		resultMap="TaskItemResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_task_item 
+		WHERE task_id = #{taskId}
+	</select>
+	
+	<select id="getFileList"
+		resultMap="com.nlp.mapper.FileMapper.FileResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_file 
+		WHERE status = #{status} and file_id in (SELECT file_id FROM t_task_item WHERE task_id = #{taskId})
+	</select>
+	
+	<select id="getTaskById"
+		resultMap="TaskResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_task
+		WHERE task_id = #{taskId}
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,163 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nlp.mapper.WebMapper">
+	<resultMap id="HostResultMap" type="com.nlp.model.Host">
+		<id property="hostId" column="host_id" />
+		<result property="hostname" column="host_name" />
+	</resultMap>
+	<resultMap id="WebURLResultMap" type="com.nlp.model.WebURL">
+		<id property="urlId" column="url_id" />
+		<result property="url" column="url" />
+		<association property="host" column="host_id"
+			select="com.nlp.mapper.WebMapper.getHostById" />
+	</resultMap>
+	<resultMap id="WebLinkResultMap" type="com.nlp.model.WebLink">
+		<id property="linkId" column="link_id" />
+		<result property="urlId" column="in_url_id" />
+		<result property="text" column="link_text" />
+		<association property="urlOut" column="out_url_id"
+			select="com.nlp.mapper.WebMapper.getWebURLById" />
+	</resultMap>
+	<resultMap id="HTMLResultMap" type="com.nlp.model.HTML">
+		<id property="htmlId" column="html_id" />
+		<result property="docno" column="docno" />
+		<result property="title" column="title" />
+		<association property="url" column="url_id"
+			select="com.nlp.mapper.WebMapper.getWebURLById" />
+		<collection property="links" column="url_id"
+			select="com.nlp.mapper.WebMapper.getWebLinkListByUrlId" />
+	</resultMap>
+	<resultMap id="WebLinkDTOResultMap" type="com.nlp.dto.WebLinkDTO">
+		<id property="id" column="html_id" />
+		<result property="title" column="title" />
+		<association property="url" column="url_id"
+			select="com.nlp.mapper.WebMapper.getWebURLById" />
+		<!-- 表很大可能会很慢 -->
+		<!-- <association property="in" column="url_id"
+			select="com.nlp.mapper.WebMapper.countInUrl" />
+		<association property="out" column="url_id"
+			select="com.nlp.mapper.WebMapper.countOutUrl" /> -->
+	</resultMap>
+	
+	<select id="countInUrl"
+		resultType="int"
+		useCache="true">
+		SELECT count(*) 
+		FROM t_link 
+		WHERE out_url_id = #{urlId}
+	</select>
+	<select id="countOutUrl"
+		resultType="int"
+		useCache="true">
+		SELECT count(*) 
+		FROM t_link 
+		WHERE in_url_id = #{urlId}
+	</select>
+	<select id="countWebURL"
+		resultType="int"
+		useCache="true">
+		SELECT count(*) 
+		FROM t_html 
+		WHERE title like '%${params.title}%'
+	</select>
+	<select id="getWebURLByTitle"
+		resultMap="WebLinkDTOResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_html 
+		<if test="params.title != null and params.title != ''">
+			WHERE title like '%${params.title}%' 
+		</if>
+		LIMIT #{start}, #{length}
+	</select>
+	
+	<insert id="createHost" 
+		parameterType="com.nlp.model.Host" 
+		flushCache="true" 
+		keyProperty="hostId" 
+		keyColumn="host_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_host (hostname) 
+		VALUES (#{hostname})
+	</insert>
+	
+	<insert id="createWebURL" 
+		parameterType="com.nlp.model.WebURL" 
+		flushCache="true" 
+		keyProperty="urlId" 
+		keyColumn="url_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_url (host_id, url) 
+		VALUES (#{host.hostId}, #{url})
+	</insert>
+	
+	<insert id="createWebLink" 
+		parameterType="com.nlp.model.WebLink" 
+		flushCache="true" 
+		keyProperty="linkId" 
+		keyColumn="link_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_link (in_url_id, out_url_id, link_text) 
+		VALUES (#{urlId}, #{urlOut.urlId}, #{text})
+	</insert>
+	
+	<insert id="createHTML" 
+		parameterType="com.nlp.model.HTML" 
+		flushCache="true" 
+		keyProperty="htmlId" 
+		keyColumn="html_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_html (url_id, docno, title) 
+		VALUES (#{url.urlId}, #{docno}, #{title})
+	</insert>
+	
+	<select id="getHostById"
+		resultMap="HostResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_host 
+		WHERE host_id = #{hostId}
+	</select>
+	
+	<select id="getHostByName"
+		resultMap="HostResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_host 
+		WHERE hostname = #{hostname}
+	</select>
+	
+	<select id="getWebURLById"
+		resultMap="WebURLResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_url 
+		WHERE url_id = #{urlId}
+	</select>
+	
+	<select id="getWebURLByUrl"
+		resultMap="WebURLResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_url 
+		WHERE url = #{url}
+	</select>
+	
+	<select id="getWebLinkListByUrlId"
+		resultMap="WebLinkResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_link 
+		WHERE in_url_id = #{urlId}
+	</select>
+	
+	<select id="getHTMLById"
+		resultMap="HTMLResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_html 
+		WHERE html_id = #{htmlId}
+	</select>
+</mapper>

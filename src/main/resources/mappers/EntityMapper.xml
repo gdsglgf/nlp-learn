@@ -1,0 +1,96 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nlp.mapper.EntityMapper">
+	<resultMap id="EntityTypeResultMap" type="com.nlp.model.TypeInfo">
+		<id property="typeId" column="entity_type_id" />
+		<result property="description" column="description" />
+		<association property="ptype" column="entity_type_pid"
+			select="com.nlp.mapper.EntityMapper.getEntityTypeById" />
+	</resultMap>
+	<resultMap id="EntityResultMap" type="com.nlp.model.Entity">
+		<id property="entityId" column="entity_type_id" />
+		<result property="name" column="name" />
+		<association property="type" column="entity_type_id"
+			select="com.nlp.mapper.EntityMapper.getEntityTypeById" />
+	</resultMap>
+	<resultMap id="EntityMentionResultMap" type="com.nlp.model.EntityMention">
+		<id property="uid" column="uid" />
+		<result property="count" column="count" />
+		<association property="entity" column="entity_id"
+			select="com.nlp.mapper.EntityMapper.getEntityById" />
+		<association property="html" column="html_id"
+			select="com.nlp.mapper.WebMapper.getHTMLById" />
+	</resultMap>
+	
+	<insert id="createEntityType" 
+		parameterType="com.nlp.model.TypeInfo" 
+		flushCache="true" 
+		keyProperty="typeId" 
+		keyColumn="entity_type_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_entity_type (description) 
+		VALUES (#{description})
+	</insert>
+	
+	<insert id="createEntity" 
+		parameterType="com.nlp.model.Entity" 
+		flushCache="true" 
+		keyProperty="entityId" 
+		keyColumn="entity_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_entity (entity_type_id, name) 
+		VALUES (#{type.typeId}, #{name})
+	</insert>
+	
+	<insert id="createEntityMention" 
+		parameterType="com.nlp.model.EntityMention" 
+		flushCache="true" 
+		keyProperty="uid" 
+		keyColumn="uid" 
+		useGeneratedKeys="true">
+		INSERT INTO t_entity_html (entity_id, html_id, count) 
+		VALUES (#{entity.entityId}, #{html.htmlId}, #{count})
+	</insert>
+	
+	<select id="getEntityTypeById"
+		resultMap="EntityTypeResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_entity_type 
+		WHERE entity_type_id = #{typeId}
+	</select>
+	
+	<select id="getEntityTypeByDescription"
+		resultMap="EntityTypeResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_entity_type 
+		WHERE description = #{description}
+	</select>
+	
+	<select id="getEntityById"
+		resultMap="EntityResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_entity 
+		WHERE entity_id = #{entityId}
+	</select>
+	
+	<select id="getEntity"
+		resultMap="EntityResultMap"
+		useCache="true">
+		SELECT t1.* 
+		FROM t_entity t1, t_entity_type t2
+		WHERE t1.entity_type_id = t2.entity_type_id and name = #{name} and description = #{description}
+	</select>
+	
+	<select id="getEntityMentionById"
+		resultMap="EntityMentionResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_entity_html 
+		WHERE uid = #{mentionId}
+	</select>
+</mapper>

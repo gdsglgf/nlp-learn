@@ -1,0 +1,112 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nlp.mapper.RelationMapper">
+	<resultMap id="RelationTypeResultMap" type="com.nlp.model.TypeInfo">
+		<id property="typeId" column="rela_type_id" />
+		<result property="description" column="description" />
+		<association property="ptype" column="rela_type_pid"
+			select="com.nlp.mapper.RelationMapper.getRelationTypeById" />
+	</resultMap>
+	<resultMap id="RelationResultMap" type="com.nlp.model.Relation">
+		<id property="relaId" column="rela_id" />
+		<association property="type" column="rela_type_id"
+			select="com.nlp.mapper.RelationMapper.getRelationTypeById" />
+		<association property="subject" column="entity_id1"
+			select="com.nlp.mapper.EntityMapper.getEntityById" />
+		<association property="object" column="entity_id2"
+			select="com.nlp.mapper.EntityMapper.getEntityById" />
+	</resultMap>
+	<resultMap id="RelationMentionResultMap" type="com.nlp.model.RelationMention">
+		<id property="uid" column="uid" />
+		<result property="count" column="count" />
+		<association property="relation" column="rela_id"
+			select="com.nlp.mapper.RelationMapper.getRelationById" />
+		<association property="html" column="html_id"
+			select="com.nlp.mapper.WebMapper.getHTMLById" />
+	</resultMap>
+	
+	<insert id="createRelationType" 
+		parameterType="com.nlp.model.TypeInfo" 
+		flushCache="true" 
+		keyProperty="typeId" 
+		keyColumn="rela_type_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_relation_type (description) 
+		VALUES (#{description})
+	</insert>
+	
+	<insert id="createRelation" 
+		parameterType="com.nlp.model.Relation" 
+		flushCache="true" 
+		keyProperty="relaId" 
+		keyColumn="rela_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_relation (entity_id1, entity_id2, rela_type_id) 
+		VALUES (#{subject.entityId}, #{object.entityId}, #{type.typeId})
+	</insert>
+	
+	<insert id="createRelationMention" 
+		parameterType="com.nlp.model.RelationMention" 
+		flushCache="true" 
+		keyProperty="uid" 
+		keyColumn="uid" 
+		useGeneratedKeys="true">
+		INSERT INTO t_relation_html (rela_id, html_id, count) 
+		VALUES (#{relation.relaId}, #{html.htmlId}, #{count})
+	</insert>
+	
+	<update id="updateRelationMention" 
+		parameterType="com.nlp.model.RelationMention">
+		UPDATE t_relation_html SET count = #{count} WHERE uid = #{uid}
+	</update>
+	
+	<select id="getRelationTypeById"
+		resultMap="RelationTypeResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_relation_type 
+		WHERE rela_type_id = #{typeId}
+	</select>
+	
+	<select id="getRelationTypeByDescription"
+		resultMap="RelationTypeResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_relation_type 
+		WHERE description = #{description}
+	</select>
+	
+	<select id="getRelationById"
+		resultMap="RelationResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_relation 
+		WHERE rela_id = #{relaId}
+	</select>
+	
+	<select id="getRelationByEntityId"
+		resultMap="RelationResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_relation 
+		WHERE entity_id1 = #{id1} and entity_id2 = #{id2}
+	</select>
+	
+	<select id="getRelationMentionById"
+		resultMap="RelationMentionResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_relation_html 
+		WHERE uid = #{mentionId}
+	</select>
+	
+	<select id="getRelationMention"
+		resultMap="RelationMentionResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_relation_html 
+		WHERE rela_id = #{relaId} and html_id = #{htmlId}
+	</select>
+</mapper>

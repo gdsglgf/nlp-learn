@@ -1,0 +1,91 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nlp.mapper.FileMapper">
+	<resultMap id="FolderResultMap" type="com.nlp.model.Folder">
+		<id property="folderId" column="dir_id" />
+		<result property="diskId" column="disk_id" />
+		<result property="folderPath" column="dir_path" />
+	</resultMap>
+	<resultMap id="FileResultMap" type="com.nlp.model.FileModel">
+		<id property="fileId" column="file_id" />
+		<result property="filename" column="filename" />
+		<result property="bytesize" column="bytesize" />
+		<result property="webcount" column="webcount" />
+		<result property="status" column="status" />
+		<association property="folder" column="dir_id"
+			select="com.nlp.mapper.FileMapper.getFolderById" />
+	</resultMap>
+
+	<insert id="createFolder" 
+		parameterType="com.nlp.model.Folder" 
+		flushCache="true" 
+		keyProperty="folderId" 
+		keyColumn="dir_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_directory (disk_id, dir_path) 
+		VALUES (#{diskId}, #{folderPath})
+	</insert>
+	
+	<select id="getFolderById" 
+		parameterType="int"
+		resultMap="FolderResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_directory 
+		WHERE dir_id = #{id}
+	</select>
+	
+	<select id="getFolder"
+		resultMap="FolderResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_directory 
+		WHERE disk_id = #{diskId} and dir_path = #{path}
+	</select>
+	
+	<insert id="createFile" 
+		parameterType="com.nlp.model.FileModel" 
+		flushCache="true" 
+		keyProperty="fileId" 
+		keyColumn="file_id" 
+		useGeneratedKeys="true">
+		INSERT INTO t_file (dir_id, filename, bytesize, webcount, status) 
+		VALUES (#{folder.folderId}, #{filename}, #{bytesize}, #{webcount}, #{status})
+	</insert>
+	
+	<select id="getFileById" 
+		parameterType="int"
+		resultMap="FileResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_file
+		WHERE file_id = #{id}
+	</select>
+	
+	<update id="updateFileWebcount">
+		UPDATE t_file SET webcount = #{webcount} WHERE file_id = #{id}
+	</update>
+	
+	<update id="updateFileStatus">
+		UPDATE t_file SET status = #{status} WHERE file_id = #{id}
+	</update>
+	
+	<select id="getFileByPage"
+		resultMap="FileResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_file 
+		WHERE status = #{status} 
+		LIMIT #{offset}, #{rows}
+	</select>
+	
+	<select id="countFile"
+		resultType="int"
+		useCache="true">
+		SELECT count(*) 
+		FROM t_file 
+		WHERE status = #{status}
+	</select>
+</mapper>
