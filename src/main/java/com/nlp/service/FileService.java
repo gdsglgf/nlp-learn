@@ -77,17 +77,35 @@ public class FileService {
 					folder = new Folder(diskId, path);
 					List<FileModel> fms = FileUtils.scanFile(path, fileType);
 					if (fms.size() > 0) {
+						fileMapper.createFolder(folder);
 						for (FileModel fm : fms) {
 							fm.setFolder(folder);
 							fileMapper.createFile(fm);
 						}
-						fileMapper.createFolder(folder);
 					}
 					log.info(String.format("Save Folder: %s, files: %d", folder, fms.size()));
 				}
 			}
 		});
 		t.start();
+	}
+	
+	public void saveFileAtOnce(int diskId, String[] filePath, String fileType) {
+		for (String path : filePath) {
+			Folder folder = fileMapper.getFolder(diskId, path);
+			if (folder == null) {
+				folder = new Folder(diskId, path);
+				List<FileModel> fms = FileUtils.scanFile(path, fileType);
+				if (fms.size() > 0) {
+					fileMapper.createFolder(folder);
+					for (FileModel fm : fms) {
+						fm.setFolder(folder);
+						fileMapper.createFile(fm);
+					}
+				}
+				log.info(String.format("Save Folder: %s, files: %d", folder, fms.size()));
+			}
+		}
 	}
 	
 	public DatatablesViewPage<FileModel> getFileByPage(int offset, int rows) {

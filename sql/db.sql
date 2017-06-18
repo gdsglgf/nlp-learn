@@ -141,3 +141,48 @@ create table if not exists t_relation_html(
 	constraint `rela_html1` foreign key (rela_id) references t_relation(rela_id),
 	constraint `rela_html2` foreign key (html_id) references t_html(html_id)
 );
+
+
+
+INSERT INTO `t_entity_type` (`entity_type_id`, `entity_type_pid`, `description`) VALUES
+(1, NULL, 'MISC'),
+(2, NULL, 'NUMBER'),
+(3, NULL, 'TIME'),
+(4, NULL, 'MONEY'),
+(5, NULL, 'GPE'),
+(6, NULL, 'DATE'),
+(7, NULL, 'ORDINAL'),
+(8, NULL, 'PERSON'),
+(9, NULL, 'DEMONYM'),
+(10, NULL, 'LOCATION'),
+(11, NULL, 'PERCENT'),
+(12, NULL, 'ORGANIZATION'),
+(13, NULL, 'FACILITY');
+
+
+INSERT INTO `t_relation_type` (`rela_type_id`, `rela_type_pid`, `description`) VALUES
+(1, NULL, 'MISC-NUMBER'),
+(2, NULL, 'ORGANIZATION-ORGANIZATION'),
+(3, NULL, 'TIME-NUMBER'),
+(4, NULL, 'ORGANIZATION-PERSON'),
+(5, NULL, 'ORDINAL-MISC'),
+(6, NULL, 'GPE-FACILITY'),
+(7, NULL, 'ORDINAL-PERSON'),
+(8, NULL, 'DATE-MISC'),
+(9, NULL, 'PERSON-GPE'),
+(10, NULL, 'FACILITY-FACILITY'),
+(11, NULL, 'GPE-ORGANIZATION'),
+(12, NULL, 'DEMONYM-LOCATION'),
+(13, NULL, 'MISC-TIME'),
+(14, NULL, 'TIME-ORGANIZATION'),
+(15, NULL, 'PERSON-MISC'),
+(16, NULL, 'PERSON-PERSON'),
+(17, NULL, 'DATE-TIME'),
+(18, NULL, 'DATE-FACILITY'),
+(19, NULL, 'ORGANIZATION-FACILITY'),
+(20, NULL, 'TIME-GPE'),
+(21, NULL, 'DATE-GPE'),
+(22, NULL, 'MISC-FACILITY'),
+(23, NULL, 'LOCATION-LOCATION'),
+(24, NULL, 'PERSON-DATE'),
+(25, NULL, 'DEMONYM-PERSON');

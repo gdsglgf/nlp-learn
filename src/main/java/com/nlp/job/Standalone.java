@@ -22,7 +22,7 @@ import com.nlp.model.Entity;
 import com.nlp.model.EntityMention;
 import com.nlp.model.FileModel;
 import com.nlp.model.HTML;
-import com.nlp.model.LengLimit;
+import com.nlp.model.LengthLimit;
 import com.nlp.model.Relation;
 import com.nlp.model.TypeInfo;
 import com.nlp.model.WebURL;
@@ -32,6 +32,7 @@ import com.nlp.service.RelationService;
 import com.nlp.service.WebService;
 import com.nlp.util.FileUtils;
 import com.nlp.util.HTMLParser;
+import com.nlp.util.JSONUtils;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreAnnotations.NamedEntityTagAnnotation;
@@ -71,7 +72,7 @@ public class Standalone {
 	// save entity and relation
 	public void exec() {
 		log.info(String.format("diskId:%d, fileType:%s, paths:%s", diskId, fileType, Arrays.toString(filePath)));
-		fileService.saveFile(diskId, filePath, fileType);
+		fileService.saveFileAtOnce(diskId, filePath, fileType);
 		List<FileModel> files = fileService.getAllPendingFile();
 		log.info(String.format("load %d files", files.size()));
 		for (FileModel fm : files) {
@@ -99,7 +100,7 @@ public class Standalone {
 	private void parse(String htmlString) {
 		WebDTO dto = HTMLParser.parse(htmlString);
 		if (dto.getHasText()) {
-			if (dto.getUrl().length() < LengLimit.URL_LENGTH) {
+			if (dto.getUrl().length() < LengthLimit.URL_LENGTH) {
 				WebURL webURL = webService.createWebURL(dto.getUrl());
 				String docno = dto.getDocno();
 				String title = dto.getTitle();
@@ -121,7 +122,7 @@ public class Standalone {
 		for (LinkDTO link : links) {
 			String href = link.getHref();
 			String txt = link.getText();
-			if (href.length() < LengLimit.URL_LENGTH && txt.length() < LengLimit.LINK_TEXT_LENGTH) {
+			if (href.length() < LengthLimit.URL_LENGTH && txt.length() < LengthLimit.LINK_TEXT_LENGTH) {
 				webService.createWebLink(urlId, href, txt);
 				cnt++;
 			} else {
@@ -214,16 +215,23 @@ public class Standalone {
 		HTML html = new HTML(htmlId);
 		for (Entry<String, Map<String, Integer>> ent : cacheCounter.entrySet()) {
 			String name = ent.getKey();
-			for (Entry<String, Integer> item : ent.getValue().entrySet()) {
-				String type = item.getKey();
-				int count = item.getValue();
-				Entity entity = entityService.createEntity(name, type);
-				entityService.createEntityMention(new EntityMention(entity, html, count));
+			if (name.length() < LengthLimit.ENTITY_NAME_LENGTH) {
+				for (Entry<String, Integer> item : ent.getValue().entrySet()) {
+					String type = item.getKey();
+					int count = item.getValue();
+					Entity entity = entityService.createEntity(name, type);
+					entityService.createEntityMention(new EntityMention(entity, html, count));
+				}
+			} else {
+				log.error(String.format("Entity name too long:%s", JSONUtils.toJSONString(ent)));
 			}
 		}
 	}
 	
 	public void saveRelation(int htmlId, EntityDTO e1, EntityDTO e2) {
+		if (e1.getName().length() > LengthLimit.ENTITY_NAME_LENGTH || e2.getName().length() > LengthLimit.ENTITY_NAME_LENGTH) {
+			return;
+		}
 		Entity sub = entityService.createEntity(e1);
 		Entity obj = entityService.createEntity(e2);
 		String type = String.format("%s-%s", e1.getType(), e2.getType());
