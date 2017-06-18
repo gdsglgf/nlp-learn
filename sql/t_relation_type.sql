@@ -1,0 +1,69 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.6
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: 2017-06-18 05:32:56
+-- 服务器版本： 5.6.16
+-- PHP Version: 5.5.9
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `openie2`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `t_relation_type`
+--
+
+CREATE TABLE IF NOT EXISTS `t_relation_type` (
+  `rela_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rela_type_pid` int(10) unsigned DEFAULT NULL,
+  `description` varchar(32) NOT NULL,
+  PRIMARY KEY (`rela_type_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=71 ;
+
+--
+-- 转存表中的数据 `t_relation_type`
+--
+
+INSERT INTO `t_relation_type` (`rela_type_id`, `rela_type_pid`, `description`) VALUES
+(1, NULL, 'MISC-NUMBER'),
+(2, NULL, 'ORGANIZATION-ORGANIZATION'),
+(3, NULL, 'TIME-NUMBER'),
+(4, NULL, 'ORGANIZATION-PERSON'),
+(5, NULL, 'ORDINAL-MISC'),
+(6, NULL, 'GPE-FACILITY'),
+(7, NULL, 'ORDINAL-PERSON'),
+(8, NULL, 'DATE-MISC'),
+(9, NULL, 'PERSON-GPE'),
+(10, NULL, 'FACILITY-FACILITY'),
+(11, NULL, 'GPE-ORGANIZATION'),
+(12, NULL, 'DEMONYM-LOCATION'),
+(13, NULL, 'MISC-TIME'),
+(14, NULL, 'TIME-ORGANIZATION'),
+(15, NULL, 'PERSON-MISC'),
+(16, NULL, 'PERSON-PERSON'),
+(17, NULL, 'DATE-TIME'),
+(18, NULL, 'DATE-FACILITY'),
+(19, NULL, 'ORGANIZATION-FACILITY'),
+(20, NULL, 'TIME-GPE'),
+(21, NULL, 'DATE-GPE'),
+(22, NULL, 'MISC-FACILITY'),
+(23, NULL, 'LOCATION-LOCATION'),
+(24, NULL, 'PERSON-DATE'),
+(25, NULL, 'DEMONYM-PERSON');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
