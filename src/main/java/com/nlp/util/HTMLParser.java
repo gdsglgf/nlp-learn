@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,6 +21,7 @@ import com.nlp.dto.LinkDTO;
 import com.nlp.dto.WebDTO;
 
 public class HTMLParser {
+	private static final Logger log = LogManager.getLogger(HTMLParser.class);
 	public static final Pattern CHARSET_PATTERN = Pattern
 			.compile("(?:charset|Charset|CHARSET)\\s*=\\s*\"?\\s*([-\\w]*?)[^-\\w]");
 	public static final String DEFAULT_CHARSET = "UTF-8";
@@ -148,8 +151,9 @@ public class HTMLParser {
 					links.add(new LinkDTO(href, linkText));
 				}
 			}
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 			hasText = false;
+			log.error(String.format("Error:%s, url:%s", e.getMessage(), url));
 		}
 		
 		return new WebDTO(docno, url, title, text, filterLink(links), hasText);

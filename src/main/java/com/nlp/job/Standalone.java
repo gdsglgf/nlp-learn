@@ -86,19 +86,20 @@ public class Standalone {
 					sb.append(line);
 					if (line.contains("</doc>")) {
 						cnt++;
-						parse(sb.toString());
+						parse(cnt, sb.toString());
 						sb = new StringBuilder();
 					}
 				}
 			} catch (IOException e) {
-				log.debug(e);
+				log.error(e);
 			}
 			log.info(String.format("File end:[%s], total %d htmls", path, cnt));
 		}
 	}
 
-	private void parse(String htmlString) {
+	private void parse(int cnt, String htmlString) {
 		WebDTO dto = HTMLParser.parse(htmlString);
+		log.info(String.format("%d, url:%s", cnt, dto.getUrl()));
 		if (dto.getHasText()) {
 			if (dto.getUrl().length() < LengthLimit.URL_LENGTH) {
 				WebURL webURL = webService.createWebURL(dto.getUrl());
@@ -112,7 +113,7 @@ public class Standalone {
 				int urlId = webURL.getUrlId();
 				saveLink(urlId, dto.getLinks());
 			} else {
-				log.debug(String.format("URL too long:[%s]", dto.getUrl()));
+				log.error(String.format("URL too long:[%s]", dto.getUrl()));
 			}
 		}
 	}
@@ -126,14 +127,17 @@ public class Standalone {
 				webService.createWebLink(urlId, href, txt);
 				cnt++;
 			} else {
-				log.debug(String.format("URL too long:[%s]", href));
+				log.error(String.format("URL too long:[urlId=%d, %s]", urlId, link));
 			}
 		}
 		log.info(String.format("Save link:[urlId=%d, total=%d]", urlId, cnt));
 	}
 	
 	private List<List<EntityDTO>> annotate(String text) {
-		Annotation annotation = new Annotation(text);
+		if (text == null || text.trim().length() == 0) {
+			return new ArrayList<List<EntityDTO>>();
+		}
+		Annotation annotation = new Annotation(text.trim());
 		pipeline.annotate(annotation);
 		List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
 		
@@ -219,11 +223,15 @@ public class Standalone {
 				for (Entry<String, Integer> item : ent.getValue().entrySet()) {
 					String type = item.getKey();
 					int count = item.getValue();
-					Entity entity = entityService.createEntity(name, type);
-					entityService.createEntityMention(new EntityMention(entity, html, count));
+					try {
+						Entity entity = entityService.createEntity(name, type);
+						entityService.createEntityMention(new EntityMention(entity, html, count));
+					} catch(Exception e) {
+						log.error(String.format("Error:%s, %s", e.getMessage(), new EntityDTO(type, name)));	// Duplicate entry *** for key 'uc_entity'
+					}
 				}
 			} else {
-				log.error(String.format("Entity name too long:%s", JSONUtils.toJSONString(ent)));
+				log.error(String.format("Entity name too long: htmlId=%d, %s", htmlId, JSONUtils.toJSONString(ent)));
 			}
 		}
 	}
