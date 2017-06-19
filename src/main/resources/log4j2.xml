@@ -16,7 +16,7 @@
 	</Appenders>
 	<Loggers>
 		<!-- config for test -->
-		<Logger name="com.nlp" level="trace" additivity="false">
+		<!-- <Logger name="com.nlp" level="trace" additivity="false">
 			<AppenderRef ref="File" />
 			<AppenderRef ref="STDOUT" />
 		</Logger>
@@ -24,16 +24,15 @@
 		<Root level="debug">
 			<AppenderRef ref="STDOUT" />
 			<AppenderRef ref="File" />
-		</Root>
+		</Root> -->
 		
-		<!-- <Logger name="com.nlp" level="info" additivity="false">
+		<Logger name="com.nlp" level="info" additivity="false">
 			<AppenderRef ref="File" />
 			<AppenderRef ref="STDOUT" />
 		</Logger>
 
 		<Root level="error">
 			<AppenderRef ref="STDOUT" />
-			<AppenderRef ref="File" />
-		</Root> -->
+		</Root>
 	</Loggers>
 </Configuration>
