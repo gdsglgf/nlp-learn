@@ -19,10 +19,18 @@ Open Information Extraction
 
 
 ## Software Environment
+### Java Platform (JDK)
+1. [Download](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+2. Install.
+3. Set JAVA_HOME = {your_path}\jdk1.\*.\*
+4. Set CLASSPATH = .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar
+5. Add **;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin** to Path
+6. Test with "java -version" in console.
+
 ### Maven
-1. [Download](http://maven.apache.org/download.cgi) the file apache-maven-3.*.*-bin.tar.gz or apache-maven-3.*.*-bin.zip from .
+1. [Download](http://maven.apache.org/download.cgi) the file apache-maven-3.\*.\*-bin.tar.gz or apache-maven-3.\*.\*-bin.zip from .
 2. Uncompress the downloaded file.
-3. Add MAVEN_HOME({your_path}/apache-maven-3.*.*/bin) to Path.
+3. Add MAVEN_HOME({your_path}/apache-maven-3.\*.\*/bin) to Path.
 4. Test whether the installation was successful. Enter "mvn -v" in console, you can see maven version info.
 
 
