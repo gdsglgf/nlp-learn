@@ -105,13 +105,17 @@ public class Standalone {
 				WebURL webURL = webService.createWebURL(dto.getUrl());
 				String docno = dto.getDocno();
 				String title = dto.getTitle();
-				HTML html = webService.createHTML(webURL, docno, title);
-
-				int htmlId = html.getHtmlId();
-				extract(htmlId, dto.getText());
-
-				int urlId = webURL.getUrlId();
-				saveLink(urlId, dto.getLinks());
+				if (title.length() < LengthLimit.TITLE_LENGTH) {
+					HTML html = webService.createHTML(webURL, docno, title);
+	
+					int htmlId = html.getHtmlId();
+					extract(htmlId, dto.getText());
+	
+					int urlId = webURL.getUrlId();
+					saveLink(urlId, dto.getLinks());
+				} else {
+					log.error(String.format("title too long:url=[%s], title=[%s]", dto.getUrl(), title));
+				}
 			} else {
 				log.error(String.format("URL too long:[%s]", dto.getUrl()));
 			}
