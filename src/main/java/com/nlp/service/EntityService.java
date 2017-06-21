@@ -48,7 +48,7 @@ public class EntityService {
 		}
 	}
 	
-	public void createEntityMention(EntityMention mention) {
+	public synchronized void createEntityMention(EntityMention mention) {
 		entityMapper.createEntityMention(mention);
 		log.debug("Create entity mention:" + mention);
 	}

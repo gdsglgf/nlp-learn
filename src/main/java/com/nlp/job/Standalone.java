@@ -97,7 +97,7 @@ public class Standalone {
 		}
 	}
 
-	private void parse(int cnt, String htmlString) {
+	public void parse(int cnt, String htmlString) {
 		WebDTO dto = HTMLParser.parse(htmlString);
 		log.info(String.format("%d, url:%s", cnt, dto.getUrl()));
 		if (dto.getHasText()) {
@@ -137,7 +137,7 @@ public class Standalone {
 		log.info(String.format("Save link:[urlId=%d, total=%d]", urlId, cnt));
 	}
 	
-	private List<List<EntityDTO>> annotate(String text) {
+	private synchronized List<List<EntityDTO>> annotate(String text) {
 		if (text == null || text.trim().length() == 0) {
 			return new ArrayList<List<EntityDTO>>();
 		}
