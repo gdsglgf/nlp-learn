@@ -46,3 +46,14 @@ Open Information Extraction
 4. New Database with **utf8_general_ci**.
 5. Run batch file sql/db-init.bat to create all tables.
 
+
+## Command Line
+```
+cd nlp-learn
+
+# For single thread job
+mvn exec:java -Dexec.mainClass="com.nlp.job.Standalone"
+
+# For multithread job
+mvn exec:java -Dexec.mainClass="com.nlp.job.ConcurrentJob"
+```
