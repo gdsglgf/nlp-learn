@@ -107,7 +107,8 @@ create table if not exists t_entity_html(
 
 	primary key(uid),
 	constraint `enth_en` foreign key (entity_id) references t_entity(entity_id),
-	constraint `enth_th` foreign key (html_id) references t_html(html_id)
+	constraint `enth_th` foreign key (html_id) references t_html(html_id),
+	constraint `uc_entity_count` unique(entity_id, html_id)
 );
 
 create table if not exists t_relation_type(
