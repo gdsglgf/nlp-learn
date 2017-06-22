@@ -60,7 +60,9 @@
 		useCache="true">
 		SELECT count(*) 
 		FROM t_html 
-		WHERE title like '%${params.title}%'
+		<if test="params.title != null and params.title != ''">
+			WHERE title like '%${params.title}%' 
+		</if>
 	</select>
 	<select id="getWebURLByTitle"
 		resultMap="WebLinkDTOResultMap"
