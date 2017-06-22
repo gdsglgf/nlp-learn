@@ -10,7 +10,7 @@
 			select="com.nlp.mapper.EntityMapper.getEntityTypeById" />
 	</resultMap>
 	<resultMap id="EntityResultMap" type="com.nlp.model.Entity">
-		<id property="entityId" column="entity_type_id" />
+		<id property="entityId" column="entity_id" />
 		<result property="name" column="name" />
 		<association property="type" column="entity_type_id"
 			select="com.nlp.mapper.EntityMapper.getEntityTypeById" />
@@ -70,6 +70,13 @@
 		WHERE description = #{description}
 	</select>
 	
+	<select id="getAllEntityType"
+		resultMap="EntityTypeResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_entity_type
+	</select>
+	
 	<select id="getEntityById"
 		resultMap="EntityResultMap"
 		useCache="true">
@@ -92,5 +99,55 @@
 		SELECT * 
 		FROM t_entity_html 
 		WHERE uid = #{mentionId}
+	</select>
+	
+	<select id="countEntity"
+		resultType="int"
+		useCache="true">
+		SELECT count(*) 
+		FROM t_entity
+		WHERE 1 
+		<if test="params != null and params.typeId != null and params.typeId != 0">
+			AND entity_type_id = #{params.typeId}
+		</if>
+		<if test="params != null and params.name != null and params.name != ''">
+			AND name like '%${params.name}%' 
+		</if>
+	</select>
+	<select id="getEntityList"
+		resultMap="EntityResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_entity
+		WHERE 1 
+		<if test="params != null and params.typeId != null and params.typeId != 0">
+			AND entity_type_id = #{params.typeId}
+		</if>
+		<if test="params != null and params.name != null and params.name != ''">
+			AND name like '%${params.name}%' 
+		</if>
+		LIMIT #{start}, #{length}
+	</select>
+	
+	<select id="countEntityMention"
+		resultType="int"
+		useCache="true">
+		SELECT count(*) 
+		FROM t_entity_html
+		WHERE 1 
+		<if test="entityId != null">
+			AND entity_id = #{entityId}
+		</if>
+	</select>
+	<select id="getEntityMentionList"
+		resultMap="EntityMentionResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_entity_html 
+		WHERE 1 
+		<if test="params != null and params.entityId != null">
+			AND entity_id = #{params.entityId}
+		</if>
+		LIMIT #{start}, #{length}
 	</select>
 </mapper>

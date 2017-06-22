@@ -1,12 +1,16 @@
 package com.nlp.service;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nlp.dto.DatatablesViewPage;
 import com.nlp.dto.EntityDTO;
+import com.nlp.dto.PageDTO;
 import com.nlp.mapper.EntityMapper;
 import com.nlp.model.Entity;
 import com.nlp.model.EntityMention;
@@ -51,5 +55,41 @@ public class EntityService {
 	public synchronized void createEntityMention(EntityMention mention) {
 		entityMapper.createEntityMention(mention);
 		log.debug("Create entity mention:" + mention);
+	}
+	
+	public DatatablesViewPage<Entity> getEntityList(PageDTO page) {
+		DatatablesViewPage<Entity> result = new DatatablesViewPage<Entity>();
+		List<Entity> pageData = entityMapper.getEntityList(page);
+		result.setAaData(pageData);
+		int total = entityMapper.countEntity(page);
+		result.setRecordsTotal(total);
+		result.setRecordsFiltered(total);
+		log.debug(String.format("Query: %s, total: %d", page, total));
+		return result;
+	}
+	
+	public List<TypeInfo> getAllEntityType() {
+		return entityMapper.getAllEntityType();
+	}
+	
+	public DatatablesViewPage<EntityMention> getEntityMentionList(PageDTO page) {
+		DatatablesViewPage<EntityMention> result = new DatatablesViewPage<EntityMention>();
+		List<EntityMention> pageData = entityMapper.getEntityMentionList(page);
+		result.setAaData(pageData);
+		Integer entityId = null;
+		try {
+			entityId = new Integer(page.getParams().get("entityId"));
+		} catch (Exception e) {
+			
+		}
+		int total = entityMapper.countEntityMention(entityId);
+		result.setRecordsTotal(total);
+		result.setRecordsFiltered(total);
+		log.debug(String.format("Query: %s, total: %d", page, total));
+		return result;
+	}
+	
+	public Entity getEntityById(int entityId) {
+		return entityMapper.getEntityById(entityId);
 	}
 }

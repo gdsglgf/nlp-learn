@@ -1,8 +1,11 @@
 package com.nlp.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;
 
+import com.nlp.dto.PageDTO;
 import com.nlp.model.Entity;
 import com.nlp.model.EntityMention;
 import com.nlp.model.TypeInfo;
@@ -18,4 +21,11 @@ public interface EntityMapper {
 	public Entity getEntityById(@Param("entityId") int entityId);
 	public Entity getEntity(@Param("name") String name, @Param("description") String description);
 	public EntityMention getEntityMentionById(@Param("mentionId") int mentionId);
+	
+	public List<TypeInfo> getAllEntityType();
+	public int countEntity(PageDTO page);
+	public List<Entity> getEntityList(PageDTO page);
+	
+	public int countEntityMention(@Param("entityId") Integer entityId);
+	public List<EntityMention> getEntityMentionList(PageDTO page);
 }
