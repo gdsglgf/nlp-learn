@@ -2,7 +2,6 @@ package com.nlp.job;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -18,6 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.nlp.model.FileModel;
+import com.nlp.model.States.FileState;
 import com.nlp.service.FileService;
 import com.nlp.util.FileUtils;
 import com.nlp.util.HTMLParser;
@@ -37,11 +37,13 @@ class Producer implements Runnable {
 	private long timeout;
 	private List<FileModel> files;
 	private BlockingQueue<Product> queues;
+	private FileService fileService;
 
-	public Producer(long timeout, List<FileModel> files, BlockingQueue<Product> queues) {
+	public Producer(long timeout, List<FileModel> files, BlockingQueue<Product> queues, FileService fileService) {
 		this.timeout = timeout;
 		this.files = files;
 		this.queues = queues;
+		this.fileService = fileService;
 	}
 
 	@Override
@@ -72,6 +74,9 @@ class Producer implements Runnable {
 				log.error(e);
 			}
 			log.info(String.format("File end:[%s], total %d htmls", path, cnt));
+			int fileId = fm.getFileId();
+			fileService.updateFileWebcount(fileId, cnt);
+			fileService.updateFileStatus(fileId, FileState.SOLVED.ordinal());
 		}
 	}
 	
@@ -112,34 +117,25 @@ class Consumer implements Runnable {
 
 @Component
 public class ConcurrentJob {
-	private static final Logger log = LogManager.getLogger(ConcurrentJob.class);
-	@Value("${src.disk.id}")
-	private int diskId;
-	@Value("${src.file.type}")
-	private String fileType;
-	@Value("${src.file.paths}")
-	private String[] filePath;
 	@Value("${job.queue.capacity}")
 	private int capacity;
 	@Value("${job.thread.size}")
 	private int nthread;
 	@Value("${job.queue.timeout}")
 	private long timeout;
-	
+
+	@Autowired
+	FileLoader fileLoader;
 	@Autowired
 	private Standalone standalone;
 	@Autowired
 	private FileService fileService;
 	
 	public void exec() {
-		log.info(String.format("diskId:%d, fileType:%s, paths:%s", diskId, fileType, Arrays.toString(filePath)));
-		fileService.saveFileAtOnce(diskId, filePath, fileType);
-		List<FileModel> files = fileService.getAllPendingFile();
-		log.info(String.format("load %d files", files.size()));
-		
+		List<FileModel> files = fileLoader.loadFile();
 		BlockingQueue<Product> queues = new LinkedBlockingQueue<Product>(capacity);
 		ExecutorService service = Executors.newCachedThreadPool();
-		service.execute(new Producer(timeout, files, queues));
+		service.execute(new Producer(timeout, files, queues, fileService));
 		for (int i = 0; i < nthread; i++) {
 			service.execute(new Consumer(timeout, queues, standalone));
 		}

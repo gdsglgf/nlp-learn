@@ -52,7 +52,7 @@ Open Information Extraction
 cd nlp-learn
 
 # For single thread job
-mvn exec:java -Dexec.mainClass="com.nlp.job.Standalone"
+mvn exec:java -Dexec.mainClass="com.nlp.job.StandaloneRunner"
 
 # For multithread job
 mvn exec:java -Dexec.mainClass="com.nlp.job.ConcurrentJob"

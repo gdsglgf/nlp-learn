@@ -8,7 +8,6 @@ public class StandaloneRunner {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		Standalone runner = ctx.getBean(Standalone.class);
 		runner.exec();
-		ctx.close();
 		ctx.registerShutdownHook();
 	}
 

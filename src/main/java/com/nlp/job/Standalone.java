@@ -3,7 +3,6 @@ package com.nlp.job;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import java.util.Map.Entry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.nlp.dto.EntityDTO;
@@ -24,6 +22,7 @@ import com.nlp.model.FileModel;
 import com.nlp.model.HTML;
 import com.nlp.model.LengthLimit;
 import com.nlp.model.Relation;
+import com.nlp.model.States.FileState;
 import com.nlp.model.TypeInfo;
 import com.nlp.model.WebURL;
 import com.nlp.service.EntityService;
@@ -45,13 +44,8 @@ import edu.stanford.nlp.util.CoreMap;
 @Component
 public class Standalone {
 	private static final Logger log = LogManager.getLogger(Standalone.class);
-	@Value("${src.disk.id}")
-	private int diskId;
-	@Value("${src.file.type}")
-	private String fileType;
-	@Value("${src.file.paths}")
-	private String[] filePath;
-	
+	@Autowired
+	FileLoader fileLoader;
 	@Autowired
 	private FileService fileService;
 	@Autowired
@@ -71,10 +65,7 @@ public class Standalone {
 	// extract entity and relation
 	// save entity and relation
 	public void exec() {
-		log.info(String.format("diskId:%d, fileType:%s, paths:%s", diskId, fileType, Arrays.toString(filePath)));
-		fileService.saveFileAtOnce(diskId, filePath, fileType);
-		List<FileModel> files = fileService.getAllPendingFile();
-		log.info(String.format("load %d files", files.size()));
+		List<FileModel> files = fileLoader.loadFile();
 		for (FileModel fm : files) {
 			int cnt = 0;
 			String line = null;
@@ -94,6 +85,9 @@ public class Standalone {
 				log.error(e);
 			}
 			log.info(String.format("File end:[%s], total %d htmls", path, cnt));
+			int fileId = fm.getFileId();
+			fileService.updateFileWebcount(fileId, cnt);
+			fileService.updateFileStatus(fileId, FileState.SOLVED.ordinal());
 		}
 	}
 
