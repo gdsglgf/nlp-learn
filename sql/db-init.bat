@@ -1,1 +1,1 @@
-mysql -uroot -Dopenie2 < db.sql
+mysql -uroot < db.sql
