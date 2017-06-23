@@ -67,6 +67,8 @@ public class Standalone {
 	public void exec() {
 		List<FileModel> files = fileLoader.loadFile();
 		for (FileModel fm : files) {
+			int fileId = fm.getFileId();
+			fileService.updateFileStatus(fileId, FileState.PROCESSING.ordinal());
 			int cnt = 0;
 			String line = null;
 			StringBuilder sb = new StringBuilder();
@@ -85,7 +87,6 @@ public class Standalone {
 				log.error(e);
 			}
 			log.info(String.format("File end:[%s], total %d htmls", path, cnt));
-			int fileId = fm.getFileId();
 			fileService.updateFileWebcount(fileId, cnt);
 			fileService.updateFileStatus(fileId, FileState.SOLVED.ordinal());
 		}

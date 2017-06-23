@@ -49,6 +49,8 @@ class Producer implements Runnable {
 	@Override
 	public void run() {
 		for (FileModel fm : files) {
+			int fileId = fm.getFileId();
+			fileService.updateFileStatus(fileId, FileState.PROCESSING.ordinal());
 			int cnt = 0;
 			String line = null;
 			StringBuilder sb = new StringBuilder();
@@ -74,7 +76,6 @@ class Producer implements Runnable {
 				log.error(e);
 			}
 			log.info(String.format("File end:[%s], total %d htmls", path, cnt));
-			int fileId = fm.getFileId();
 			fileService.updateFileWebcount(fileId, cnt);
 			fileService.updateFileStatus(fileId, FileState.SOLVED.ordinal());
 		}
