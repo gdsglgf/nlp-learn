@@ -24,22 +24,33 @@ public class EntityService {
 	private EntityMapper entityMapper;
 	
 	public synchronized TypeInfo createEntityType(String type) {
-		TypeInfo typtInfo = entityMapper.getEntityTypeByDescription(type);
-		if (typtInfo == null) {
-			typtInfo = new TypeInfo(type);
-			entityMapper.createEntityType(typtInfo);
-			log.debug("Create entity type:" + typtInfo);
+		TypeInfo typtInfo = null;
+		try {
+			typtInfo = entityMapper.getEntityTypeByDescription(type);
+			if (typtInfo == null) {
+				typtInfo = new TypeInfo(type);
+				entityMapper.createEntityType(typtInfo);
+				log.debug("Create entity type:" + typtInfo);
+			}
+		} catch (Exception e) {
+			log.error(String.format("%s", e.getMessage()));
 		}
+		
 		return typtInfo;
 	}
 	
 	public synchronized Entity createEntity(String name, String type) {
-		Entity entity = entityMapper.getEntity(name, type);
-		if (entity == null) {
-			TypeInfo typtInfo = createEntityType(type);
-			entity = new Entity(typtInfo, name);
-			entityMapper.createEntity(entity);
-			log.debug("Create entity:" + entity);
+		Entity entity = null;
+		try {
+			entity = entityMapper.getEntity(name, type);
+			if (entity == null) {
+				TypeInfo typtInfo = createEntityType(type);
+				entity = new Entity(typtInfo, name);
+				entityMapper.createEntity(entity);
+				log.debug("Create entity:" + entity);
+			}
+		} catch (Exception e) {
+			log.error(String.format("%s", e.getMessage()));
 		}
 		return entity;
 	}
@@ -53,8 +64,12 @@ public class EntityService {
 	}
 	
 	public synchronized void createEntityMention(EntityMention mention) {
-		entityMapper.createEntityMention(mention);
-		log.debug("Create entity mention:" + mention);
+		try {
+			entityMapper.createEntityMention(mention);
+			log.debug("Create entity mention:" + mention);
+		} catch (Exception e) {
+			log.error(String.format("%s", e.getMessage()));
+		}	
 	}
 	
 	public DatatablesViewPage<Entity> getEntityList(PageDTO page) {

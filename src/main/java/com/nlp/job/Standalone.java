@@ -102,12 +102,13 @@ public class Standalone {
 				String title = dto.getTitle();
 				if (title.length() < LengthLimit.TITLE_LENGTH) {
 					HTML html = webService.createHTML(webURL, docno, title);
-	
-					int htmlId = html.getHtmlId();
-					extract(htmlId, dto.getText());
-	
-					int urlId = webURL.getUrlId();
-					saveLink(urlId, dto.getLinks());
+					if (html != null) {
+						int htmlId = html.getHtmlId();
+						extract(htmlId, dto.getText());
+		
+						int urlId = webURL.getUrlId();
+						saveLink(urlId, dto.getLinks());
+					}
 				} else {
 					log.error(String.format("title too long:url=[%s], title=[%s]", dto.getUrl(), title));
 				}
@@ -239,11 +240,15 @@ public class Standalone {
 		if (e1.getName().length() > LengthLimit.ENTITY_NAME_LENGTH || e2.getName().length() > LengthLimit.ENTITY_NAME_LENGTH) {
 			return;
 		}
-		Entity sub = entityService.createEntity(e1);
-		Entity obj = entityService.createEntity(e2);
-		String type = String.format("%s-%s", e1.getType(), e2.getType());
-		TypeInfo typeInfo = relationService.createRelationType(type);
-		Relation rela = relationService.createRelation(new Relation(sub, obj, typeInfo));
-		relationService.createRelationMention(htmlId, rela);
+		try {
+			Entity sub = entityService.createEntity(e1);
+			Entity obj = entityService.createEntity(e2);
+			String type = String.format("%s-%s", e1.getType(), e2.getType());
+			TypeInfo typeInfo = relationService.createRelationType(type);
+			Relation rela = relationService.createRelation(new Relation(sub, obj, typeInfo));
+			relationService.createRelationMention(htmlId, rela);
+		} catch (Exception e) {
+			log.error(e);
+		}
 	}
 }

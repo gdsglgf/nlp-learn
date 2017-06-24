@@ -59,8 +59,14 @@ public class WebService {
 	}
 
 	public synchronized HTML createHTML(WebURL url, String docno, String title) {
-		HTML html = new HTML(docno, title, url);
-		webMapper.createHTML(html);
+		HTML html = null;
+		try {
+			html = new HTML(docno, title, url);
+			webMapper.createHTML(html);
+		} catch (Exception e) {
+			log.error(e);
+		}
+		
 		return html;
 	}
 

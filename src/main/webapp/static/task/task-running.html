@@ -1,26 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<link rel="stylesheet" href="../../assets/exts/bootstrap/css/bootstrap.min.css">
+	<style type="text/css">
+		.bs-docs-section {margin-bottom: 10px;}
+		th, td {text-align: center;}
+	</style>
 </head>
 <body>
 	<div class="container">
-		<div class="page-header">
-			<h2>监控信息抽取任务</h2>
-		</div>
 		<div class="row">
 			<div class="col-md-9" role="main">
-				
+				<div class="bs-docs-section">
+					<h2 class="page-header">任务监控信息</h2>
+					<div>
+						<div id="container" style="min-width:400px;height:400px"></div>
+					</div>
+					<div>
+						<form id="dataForm" class="form-horizontal" method="POST" onsubmit="onSubmit(); return false;">
+							<div class="form-group">
+								<div class="col-sm-offset-6 col-sm-4">
+									<button type="button" onclick="onSubmit();" class="btn btn-success">刷新</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<script type="text/javascript" src="../../assets/exts/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="../../assets/exts/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../assets/exts/highcharts/highcharts.js"></script>
+	<script type="text/javascript" src="../../assets/exts/highcharts/exporting.js"></script>
+	<script type="text/javascript" src="../../assets/exts/highcharts/highcharts-zh_CN.js"></script>
+
+	<script type="text/javascript">
+		Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '消息队列统计信息'
+        },
+        xAxis: {
+            categories: ['HTML队列', 'DATA队列', 'TEXT队列']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '队列数量'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+		credits: {
+			enabled: false
+		},
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' +
+                    '入队数量: ' + this.point.stackTotal;
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: '出队数量',
+            data: [968, 756, 523]
+        }, {
+            name: '剩余数量',
+            data: [50, 165, 200]
+        }]
+    });
+	</script>
 
 </body>
 </html>

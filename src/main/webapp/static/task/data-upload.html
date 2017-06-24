@@ -6,6 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<link rel="stylesheet" href="../../assets/exts/bootstrap/css/bootstrap.min.css">
+	<style type="text/css">
+		.error {outline: red solid 1px;}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -16,7 +19,7 @@
 			<div class="col-md-9" role="main">
 				<form id="fileUploadForm" class="form-horizontal" action="#">
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-6 bg-info text-danger" style="display:block;padding: 10px;">错误信息</div>
+						<div class="col-sm-offset-2 col-sm-6 bg-info text-danger" style="display:block;padding: 10px;">文件夹目录不能存在</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">硬盘编号</label>
@@ -43,7 +46,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">文件夹路径</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control" name="filePath" required>
+							<input type="text" class="form-control error" name="filePath" value="X:\input\data" required>
 						</div>
 						<div class="col-sm-2">
 							<input type="button" class="btn btn-primary" value="添加文件路径" onclick="addPath()">

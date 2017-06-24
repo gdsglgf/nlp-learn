@@ -7,7 +7,7 @@ import edu.stanford.nlp.coref.data.CorefChain;
 import edu.stanford.nlp.coref.data.Mention;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
-import edu.stanford.nlp.pipeline.HybridCorefAnnotator;
+import edu.stanford.nlp.pipeline.CorefAnnotator;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.StringUtils;
@@ -17,14 +17,14 @@ public class ChineseCoref {
 	public static void main(String[] args) {
 		String text = "全国两会接近尾声，习近平总书记去了六个团组，对一些重要工作做出新部署。对扶贫干部，他要求“坚守岗位”。";
 		args = new String[] { 
-				"-props", "edu/stanford/nlp/coref/hybrid/properties/zh-coref-default.properties" // StanfordCoreNLP-chinese.properties
+				"-props", "edu/stanford/nlp/coref/hybrid/properties/zh-coref-conll.properties" // StanfordCoreNLP-chinese.properties
 				};
 
 		Annotation document = new Annotation(text);
 		Properties props = StringUtils.argsToProperties(args);
 		StanfordCoreNLP corenlp = new StanfordCoreNLP(props);
 		corenlp.annotate(document);
-		HybridCorefAnnotator hcoref = new HybridCorefAnnotator(props);
+		CorefAnnotator hcoref = new CorefAnnotator(props);
 		hcoref.annotate(document);
 		
 		System.out.println("---");
