@@ -71,40 +71,28 @@ public class FileService {
 	
 	public void saveFile(int diskId, String[] filePath, String fileType) {
 		Thread t = new Thread(() -> {
-			for (String path : filePath) {
-				Folder folder = fileMapper.getFolder(diskId, path);
-				if (folder == null) {
-					folder = new Folder(diskId, path);
-					List<FileModel> fms = FileUtils.scanFile(path, fileType);
-					if (fms.size() > 0) {
-						fileMapper.createFolder(folder);
-						for (FileModel fm : fms) {
-							fm.setFolder(folder);
-							fileMapper.createFile(fm);
-						}
-					}
-					log.info(String.format("Save Folder: %s, files: %d", folder, fms.size()));
-				}
-			}
+			saveFileAtOnce(diskId, filePath, fileType);
 		});
 		t.start();
 	}
 	
 	public void saveFileAtOnce(int diskId, String[] filePath, String fileType) {
 		for (String path : filePath) {
-			Folder folder = fileMapper.getFolder(diskId, path);
-			if (folder == null) {
-				folder = new Folder(diskId, path);
-				List<FileModel> fms = FileUtils.scanFile(path, fileType);
-				if (fms.size() > 0) {
+			List<FileModel> fms = FileUtils.scanFile(path, fileType);
+			if (fms.size() > 0) {
+				Folder folder = fileMapper.getFolder(diskId, path);
+				if (folder == null) {
+					folder = new Folder(diskId, path);
 					fileMapper.createFolder(folder);
-					for (FileModel fm : fms) {
-						fm.setFolder(folder);
+				}
+				for (FileModel fm : fms) {
+					fm.setFolder(folder);
+					if (0 == fileMapper.countOneFile(folder.getFolderId(), fm.getFilename())) {
 						fileMapper.createFile(fm);
 					}
 				}
-				log.info(String.format("Save Folder: %s, files: %d", folder, fms.size()));
 			}
+			log.info(String.format("Save Folder: %s, files: %d", path, fms.size()));
 		}
 	}
 	

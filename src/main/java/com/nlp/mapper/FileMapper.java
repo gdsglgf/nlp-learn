@@ -34,6 +34,20 @@ public interface FileMapper {
 	 */
 	public FileModel getFileById(@Param("id") int id);
 	/**
+	 * 查找文件
+	 * @param dirId 目录编号
+	 * @param filename 文件名
+	 * @return
+	 */
+	public FileModel getFile(@Param("dirId")int dirId, @Param("filename")String filename);
+	/**
+	 * 文件计数
+	 * @param dirId 目录编号
+	 * @param filename 文件名
+	 * @return
+	 */
+	public int countOneFile(@Param("dirId")int dirId, @Param("filename")String filename);
+	/**
 	 * 更新文件网页个数
 	 * @param fileId 文件编号
 	 * @param webcount 网页个数
@@ -46,18 +60,11 @@ public interface FileMapper {
 	 */
 	public void updateFileStatus(@Param("id") int fileId, @Param("status") int status);
 	/**
-	 * 导出文件统计信息（文件夹编号、目录路径、文件类型、文件个数）
-	 * @return
-	 */
-//	public List<Map<String, Object>> folderReport();
-	
-	/**
 	 * 统计文件个数
 	 * @param status 文件状态
 	 * @return
 	 */
 	public int countFile(@Param("status") int status);
-	
 	/**
 	 * 分页查询数据文件
 	 * @param status 文件状态

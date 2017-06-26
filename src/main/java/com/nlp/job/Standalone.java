@@ -45,7 +45,7 @@ import edu.stanford.nlp.util.CoreMap;
 public class Standalone {
 	private static final Logger log = LogManager.getLogger(Standalone.class);
 	@Autowired
-	FileLoader fileLoader;
+	private FileLoader fileLoader;
 	@Autowired
 	private FileService fileService;
 	@Autowired

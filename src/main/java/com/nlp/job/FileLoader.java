@@ -26,11 +26,14 @@ public class FileLoader {
 	private FileService fileService;
 	
 	public List<FileModel> loadFile() {
-		log.info(String.format("diskId:%d, fileType:%s, paths:%s", diskId, fileType, Arrays.toString(filePath)));
-		fileService.saveFileAtOnce(diskId, filePath, fileType);
+		scanAndSaveFile();
 		List<FileModel> files = fileService.getAllPendingFile();
 		log.info(String.format("load %d files", files.size()));
-		
 		return files;
+	}
+	
+	public void scanAndSaveFile() {
+		log.info(String.format("diskId:%d, fileType:%s, paths:%s", diskId, fileType, Arrays.toString(filePath)));
+		fileService.saveFileAtOnce(diskId, filePath, fileType);
 	}
 }

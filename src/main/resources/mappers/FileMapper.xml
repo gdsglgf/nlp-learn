@@ -64,6 +64,15 @@
 		WHERE file_id = #{id}
 	</select>
 	
+	<select id="getFile" 
+		parameterType="int"
+		resultMap="FileResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_file
+		WHERE dir_id = #{dirId} AND filename = #{filename}
+	</select>
+	
 	<update id="updateFileWebcount">
 		UPDATE t_file SET webcount = #{webcount} WHERE file_id = #{id}
 	</update>
@@ -87,5 +96,13 @@
 		SELECT count(*) 
 		FROM t_file 
 		WHERE status = #{status}
+	</select>
+	
+	<select id="countOneFile"
+		resultType="int"
+		useCache="true">
+		SELECT count(*) 
+		FROM t_file 
+		WHERE dir_id = #{dirId} AND filename = #{filename}
 	</select>
 </mapper>
