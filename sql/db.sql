@@ -1,7 +1,7 @@
 
-CREATE DATABASE IF NOT EXISTS openie2 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS openie DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-use openie2;
+use openie;
 
 drop table if exists `t_entity_html`, `t_relation_html`, `t_relation`, `t_relation_type`, `t_entity`, `t_entity_type`, `t_task_item`, `t_task`, `t_html`, `t_link`, `t_url`, `t_host`, `t_file`, `t_directory`;
 
@@ -22,7 +22,8 @@ create table if not exists t_file(
 	status int(10) not null,
 
 	primary key(file_id),
-	constraint `file_dir` foreign key (dir_id) references t_directory(dir_id)
+	constraint `file_dir` foreign key (dir_id) references t_directory(dir_id),
+	constraint `uc_file` unique(dir_id, filename)
 );
 
 create table if not exists t_task(
