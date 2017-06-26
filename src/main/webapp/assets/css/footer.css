@@ -21,3 +21,18 @@ body {
 	margin: 20px 0;
 	text-align: center;
 }
+
+.bs-docs-section {
+	margin-bottom: 60px;
+}
+		
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+	color: #fff;
+	background-color: #428bca;
+}
+
+th, td {
+	text-align:center;
+}
