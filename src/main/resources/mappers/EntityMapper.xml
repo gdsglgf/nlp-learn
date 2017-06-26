@@ -85,6 +85,14 @@
 		WHERE entity_id = #{entityId}
 	</select>
 	
+	<select id="getEntityByName"
+		resultMap="EntityResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_entity 
+		WHERE name = #{name}
+	</select>
+	
 	<select id="getEntity"
 		resultMap="EntityResultMap"
 		useCache="true">

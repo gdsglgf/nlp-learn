@@ -19,6 +19,7 @@ public interface EntityMapper {
 	public TypeInfo getEntityTypeById(@Param("typeId") int typeId);
 	public TypeInfo getEntityTypeByDescription(@Param("description") String description);
 	public Entity getEntityById(@Param("entityId") int entityId);
+	public Entity getEntityByName(@Param("name") String name);
 	public Entity getEntity(@Param("name") String name, @Param("description") String description);
 	public EntityMention getEntityMentionById(@Param("mentionId") int mentionId);
 	

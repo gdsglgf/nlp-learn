@@ -107,4 +107,8 @@ public class EntityService {
 	public Entity getEntityById(int entityId) {
 		return entityMapper.getEntityById(entityId);
 	}
+	
+	public Entity getEntityByName(String name) {
+		return entityMapper.getEntityByName(name);
+	}
 }
