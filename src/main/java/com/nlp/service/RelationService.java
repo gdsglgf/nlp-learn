@@ -1,11 +1,15 @@
 package com.nlp.service;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nlp.dto.DatatablesViewPage;
+import com.nlp.dto.PageDTO;
 import com.nlp.mapper.RelationMapper;
 import com.nlp.model.HTML;
 import com.nlp.model.Relation;
@@ -68,5 +72,28 @@ public class RelationService {
 		}
 			
 		return mention;
+	}
+	
+	public DatatablesViewPage<Relation> getRelationList(PageDTO page) {
+		DatatablesViewPage<Relation> result = new DatatablesViewPage<Relation>();
+		String type = page.getParams().get("type");
+		TypeInfo relaType = relationMapper.getRelationTypeByDescription(type);
+		Integer typeId = null;
+		if (relaType != null) {
+			typeId = relaType.getTypeId();
+			page.getParams().put("typeId", typeId.toString());
+		}
+		if (type.equals("ALL-ALL") || typeId != null) {
+			List<Relation> pageData = relationMapper.getRelationList(page);
+			result.setAaData(pageData);
+			int total = 0;
+			if (pageData.size() > 0) {
+				total = relationMapper.countRelation(page);
+			}
+			result.setRecordsTotal(total);
+			result.setRecordsFiltered(total);
+			log.debug(String.format("Query: %s, total: %d", page, total));
+		}
+		return result;
 	}
 }

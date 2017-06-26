@@ -1,8 +1,11 @@
 package com.nlp.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;
 
+import com.nlp.dto.PageDTO;
 import com.nlp.model.Relation;
 import com.nlp.model.RelationMention;
 import com.nlp.model.TypeInfo;
@@ -20,4 +23,7 @@ public interface RelationMapper {
 	public Relation getRelationByEntityId(@Param("id1") int id1, @Param("id2") int id2);
 	public RelationMention getRelationMentionById(@Param("mentionId") int mentionId);
 	public RelationMention getRelationMention(@Param("relaId") int relaId, @Param("htmlId") int htmlId);
+	
+	public int countRelation(PageDTO page);
+	public List<Relation> getRelationList(PageDTO page);
 }

@@ -109,4 +109,32 @@
 		FROM t_relation_html 
 		WHERE rela_id = #{relaId} and html_id = #{htmlId}
 	</select>
+	
+	<select id="countRelation"
+		resultType="int"
+		useCache="true">
+		SELECT count(*) 
+		FROM t_relation
+		WHERE 1 
+		<if test="params != null and params.typeId != null">
+			AND rela_type_id = #{params.typeId}
+		</if>
+		<if test="params != null and params.entityId != null">
+			AND (entity_id1 = #{params.entityId} OR entity_id2 = #{params.entityId})
+		</if>
+	</select>
+	<select id="getRelationList"
+		resultMap="RelationResultMap"
+		useCache="true">
+		SELECT * 
+		FROM t_relation 
+		WHERE 1 
+		<if test="params != null and params.typeId != null">
+			AND rela_type_id = #{params.typeId}
+		</if>
+		<if test="params != null and params.entityId != null">
+			AND (entity_id1 = #{params.entityId} OR entity_id2 = #{params.entityId})
+		</if>
+		LIMIT #{start}, #{length}
+	</select>
 </mapper>
