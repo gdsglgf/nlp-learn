@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Base Components -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.nlp" />
+
+	<util:properties id="propertyConfigurer" location="classpath:configs.properties" />
+	<context:property-placeholder properties-ref="propertyConfigurer" />
+
+	<!-- Spring MVC config -->
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/assets/**" location="/assets/" />
+	<mvc:resources mapping="/static/**" location="/static/" />
+
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="maxWait" value="${jdbc.maxWait}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+		<property name="validationQuery" value="SELECT 1" />
+	</bean>
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:/mappers/*.xml" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.nlp.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sessionFactory" />
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<constructor-arg index="0" value="${jms.broker.url}" />
+	</bean>
+	<bean id="connectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<constructor-arg ref="amqConnectionFactory" />
+	</bean>
+	
+	<bean id="docFileDest" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="${jms.queue.doc}" />
+	</bean>
+	<bean id="docFileJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="docFileDest" />
+	</bean>
+	<bean id="docFileMessageReceiver" class="com.nlp.message.DocFileMessageReceiver" />
+	<bean id="docFileMessageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="docFileDest" />
+		<property name="messageListener" ref="docFileMessageReceiver" />
+		<property name="concurrentConsumers" value="4" />
+		<property name="maxConcurrentConsumers" value="8" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="idleTaskExecutionLimit" value="4" />
+		<property name="idleConsumerLimit" value="2" />
+	</bean>
+	
+	<bean id="linkSaverDest" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="${jms.queue.link}" />
+	</bean>
+	<bean id="linkSaverJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="linkSaverDest" />
+	</bean>
+	<bean id="linkSaver" class="com.nlp.message.LinkSaver" />
+	<bean id="linkSaverListener" class="org.springframework.jms.listener.SimpleMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="linkSaverDest" />
+		<property name="messageListener" ref="linkSaver" />
+		<property name="concurrentConsumers" value="16" />
+	</bean>
+	
+	<bean id="entityExtracterDest" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="${jms.queue.text}" />
+	</bean>
+	<bean id="entityExtracterJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="entityExtracterDest" />
+	</bean>
+	<bean id="entityExtracter" class="com.nlp.message.EntityExtracter" />
+	<bean id="entityExtracterListener" class="org.springframework.jms.listener.SimpleMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="entityExtracterDest" />
+		<property name="messageListener" ref="entityExtracter" />
+		<property name="concurrentConsumers" value="16" />
+	</bean>
+	
+	<bean id="docFileMessageSender" class="com.nlp.message.DocFileMessageSender" />
+</beans>
