@@ -1,4 +1,5 @@
 package com.nlp.dto;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DatatablesViewPage<T> {
@@ -7,7 +8,9 @@ public class DatatablesViewPage<T> {
 	private int recordsTotal;
 	private int recordsFiltered;
 
-	public DatatablesViewPage() {}
+	public DatatablesViewPage() {
+		aaData = new ArrayList<T>();
+	}
 
 	public int getDraw() {
 		return draw;
