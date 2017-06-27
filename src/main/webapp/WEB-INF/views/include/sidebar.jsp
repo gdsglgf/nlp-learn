@@ -6,7 +6,7 @@
 				</ul>
 				<h4>信息抽取</h4>
 				<ul class="nav nav-sidebar">
-					<li id="queue-report"><a href="<c:url value="/task/run-all" />">信息抽取</a></li>
+					<li id="queue-report"><a href="<c:url value="/task/queue-report" />">信息抽取</a></li>
 				</ul>
 				<h4>信息管理</h4>
 				<ul class="nav nav-sidebar">
