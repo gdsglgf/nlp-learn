@@ -25,6 +25,10 @@ public class FileLoader {
 	@Autowired
 	private FileService fileService;
 	
+	public String getFileType() {
+		return fileType;
+	}
+	
 	public List<FileModel> loadFile() {
 		scanAndSaveFile();
 		List<FileModel> files = fileService.getAllPendingFile();
