@@ -39,7 +39,7 @@
 							</thead>
 						</table>
 						<a href="<c:url value="/task/run-all" />" class="btn btn-success">处理所有数据</a>
-						<button type="submit" class="btn btn-success" style="margin-bottom:20px;">发布任务</button>
+						<button type="submit" class="btn btn-success">发布任务</button>
 					</form>
 				</div>
 			</div>
