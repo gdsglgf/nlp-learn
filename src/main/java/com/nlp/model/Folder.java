@@ -19,6 +19,10 @@ public class Folder {
 	public Folder() {
 	}
 	
+	public Folder(String folderPath) {
+		this.folderPath = folderPath;
+	}
+	
 	public Folder(int diskId, String folderPath) {
 		this.diskId = diskId;
 		this.folderPath = folderPath;

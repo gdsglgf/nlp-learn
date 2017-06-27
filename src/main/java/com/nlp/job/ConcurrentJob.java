@@ -1,7 +1,9 @@
 package com.nlp.job;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -17,6 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.nlp.model.FileModel;
+import com.nlp.model.Folder;
 import com.nlp.model.States.FileState;
 import com.nlp.service.FileService;
 import com.nlp.util.FileUtils;
@@ -118,6 +121,7 @@ class Consumer implements Runnable {
 
 @Component
 public class ConcurrentJob {
+	private static final Logger log = LogManager.getLogger(ConcurrentJob.class);
 	@Value("${job.queue.capacity}")
 	private int capacity;
 	@Value("${job.thread.size}")
@@ -134,6 +138,10 @@ public class ConcurrentJob {
 	
 	public void exec() {
 		List<FileModel> files = fileLoader.loadFile();
+		exec(files);
+	}
+	
+	public void exec(List<FileModel> files) {
 		BlockingQueue<Product> queues = new LinkedBlockingQueue<Product>(capacity);
 		ExecutorService service = Executors.newCachedThreadPool();
 		service.execute(new Producer(timeout, files, queues, fileService));
@@ -142,10 +150,41 @@ public class ConcurrentJob {
 		}
 	}
 	
+	public void execWithCommand(String[] paths) {
+		String fileType = fileLoader.getFileType();
+		List<FileModel> files = new ArrayList<FileModel>();
+		for (String f : paths) {
+			if (f.endsWith(fileType)) {
+				File file = new File(f);
+				if (file.isFile()) {
+					FileModel fm = new FileModel();
+					Folder folder = new Folder(file.getParent());
+					fm.setFolder(folder);
+					fm.setFilename(file.getName());
+					files.add(fm);
+				} else {
+					log.info(String.format("Is not file:%s", f));
+				}
+			} else {
+				log.info(String.format("File not end with %s, but %s", fileType, f));
+			}
+		}
+
+		int fileNum = files.size();
+		if (fileNum > 0) {
+			log.info(String.format("load %d files", fileNum));
+			exec(files);
+		}
+	}
+	
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		ConcurrentJob runner = ctx.getBean(ConcurrentJob.class);
-		runner.exec();
+		if (args.length > 0) {
+			runner.execWithCommand(args);
+		} else {
+			runner.exec();
+		}
 		ctx.registerShutdownHook();
 	}
 }
