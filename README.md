@@ -74,6 +74,9 @@ mvn exec:java -Dexec.mainClass="com.nlp.job.ConcurrentJob"
 
 mvn exec:java -Dexec.mainClass="com.nlp.job.ConcurrentJob" -Dexec.args="/data/a.bz2 /data/b.bz2"
 
+# For activeMQ
+mvn exec:java -Dexec.mainClass="com.nlp.job.ActiveMQRunner"
+
 # tools
 mvn exec:java -Dexec.mainClass="com.nlp.tool.Statistics" -Dexec.args="'2017-06-23 17:53:00' '2017-06-24 13:49:00' 7676"
 
