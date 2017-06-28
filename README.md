@@ -33,11 +33,26 @@ Open Information Extraction
 3. Add MAVEN_HOME({your_path}/apache-maven-3.\*.\*/bin) to Path.
 4. Test whether the installation was successful. Enter "mvn -v" in console, you can see maven version info.
 
-
 ### XAMPP
 1. [Download](https://www.apachefriends.org/download.html).
 2. Install.
 3. Add MySQL_HOME({your_path}/xampp/mysql/bin) to Path.
+
+### ActiveMQ
+1. [Download](http://activemq.apache.org/).
+2. Install.
+3. Enable jmxrmi as follows:
+```xml
+## Edit {ActiveMQ_HOME}\conf\activemq.xml
+
+<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="${activemq.data}">
+replace with
+<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="${activemq.data}" useJmx="true">
+
+<managementContext createConnector="false"/>
+replace with
+<managementContext createConnector="true" connectorPath="/jmxrmi" connectorPort="1099" />
+```
 
 ## Init Database
 1. Run xampp-control.
